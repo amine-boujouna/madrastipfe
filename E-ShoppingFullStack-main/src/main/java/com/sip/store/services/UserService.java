@@ -35,5 +35,11 @@ public class UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+    public void saveuser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        userRepository.save(user);
+    }
+
 
 }

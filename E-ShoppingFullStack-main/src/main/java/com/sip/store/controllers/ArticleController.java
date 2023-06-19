@@ -53,7 +53,7 @@ public class ArticleController {
     	return "article/addArticle";
     }
     
-    @PostMapping("add")
+   @PostMapping("add")
     //@ResponseBody
     public String addArticle(@Valid Article article, BindingResult result, @RequestParam(name = "providerId", required = false) Long p,@RequestParam("files") MultipartFile[] files,@RequestParam("filesProfilePicture") MultipartFile[] filesProfilePicture) {
     	
@@ -93,6 +93,8 @@ public class ArticleController {
     	
     	//return article.getLabel() + " " +article.getPrice() + " " + p.toString();
     }
+
+
     
     @GetMapping("delete/{id}")
     public String deleteProvider(@PathVariable("id") long id, Model model) {
@@ -114,7 +116,7 @@ public class ArticleController {
         
         return "article/updateArticle";
     }
-    @PostMapping("edit/{id}")
+   @PostMapping("edit/{id}")
     public String updateArticle(@PathVariable("id") long id, @Valid Article article, BindingResult result,
         Model model, @RequestParam(name = "providerId", required = false) Long p, @RequestParam("files") MultipartFile[] files, @RequestParam("filesProfilePicture") MultipartFile[] filesProfilePicture) {
         if (result.hasErrors()) {
@@ -155,6 +157,8 @@ public class ArticleController {
         model.addAttribute("articles", articleRepository.findAll());
         return "article/listArticles";
     }
+
+
 
     @GetMapping("show/{id}")
     public String showArticleDetails(@PathVariable("id") long id, Model model) {

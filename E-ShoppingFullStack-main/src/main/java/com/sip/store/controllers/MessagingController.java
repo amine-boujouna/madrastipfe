@@ -69,7 +69,7 @@ public class MessagingController {
     
     @PostMapping("add")
     //@ResponseBody
-    public String addMessaging(@Valid Messaging messaging, BindingResult result, @RequestParam(name = "userId", required = false) Integer p) {
+    public String addMessaging(@Valid Messaging messaging, BindingResult result, @RequestParam(name = "userId", required = false) Long p) {
     	
     	 User user = userRepository.findById(p).orElseThrow(()->new IllegalArgumentException("Invalid User Id:" + p));
     	messaging.setRecipient(user);

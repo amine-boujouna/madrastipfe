@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!--*******************
+    Preloader start
+********************-->
+<div id="preloader">
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+        </svg>
+    </div>
+</div>
+<!--*******************
+    Preloader end
+********************-->
+
+
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div th:replace="fragments/navbarBack :: navbar"/>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+
+    <!--**********************************
+        Header start
+    ***********************************-->
+    <div th:replace="fragments/headerBack :: header"/>
+    <!--**********************************
+        Header end ti-comment-alt
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    <div th:replace="fragments/sidebarBack :: sidebar"/>
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/users/list}"  th:text="#{label.userList}"></a></li>
+                    <li class="breadcrumb-item active"><a href=""  th:text="#{label.viewUser}"></a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-validation">
+                                <div class="container my-5">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="col-md-12">
+                                                <form action="#"   method="">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">ID</label>
+                                                            <p th:text="${user.id}">Id</p>
+                                                        </div>
+
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">nom</label>
+                                                            <p th:text="${user.nom}">Label</p>
+                                                        </div>
+
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">prenom</label>
+                                                            <p th:text="${user.prenom}">Price</p>
+                                                        </div>
+
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">email</label>
+                                                            <p th:text="${user.email}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">password</label>
+                                                            <p th:text="${user.password}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">salaire</label>
+                                                            <p th:text="${user.salaire}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">specialite</label>
+                                                            <p th:text="${user.specialite}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">biographie</label>
+                                                            <p th:text="${user.biographie}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">nompere</label>
+                                                            <p th:text="${user.nompere}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">nommere</label>
+                                                            <p th:text="${user.nommere}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">username</label>
+                                                            <p th:text="${user.username}">Provider</p>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="label" class="col-form-label">photo</label>
+
+                                                            <img alt="Image" th:src="@{'/uploads/'+ ${user.photo}}" width="250" height="250"/>
+
+                                                        </div>
+
+                                                        <div class="form-group col-md-12">
+                                                            <a th:href="@{/users/list}"> <input type="button" class="btn btn-primary" value="return a eleve list"></a>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div th:replace="fragments/footerBack :: footer"/>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+<!--**********************************
+    Scripts
+***********************************-->
+<script th:src="@{/plugins/common/common.min.js}"></script>
+<script th:src="@{/js/custom.min.js}"></script>
+<script th:src="@{/js/settings.js}"></script>
+<script th:src="@{/js/gleek.js}"></script>
+<script th:src="@{/js/styleSwitcher.js}"></script>
+
+<script th:src="@{/plugins/validation/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/validation/jquery.validate-init.js}"></script>
+
+
+</body>
+
+</html>

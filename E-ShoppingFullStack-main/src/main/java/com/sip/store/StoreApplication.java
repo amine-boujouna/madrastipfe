@@ -12,23 +12,16 @@ import java.nio.file.Paths;
 
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 @SpringBootApplication
 public class StoreApplication {
 
 	public static void main(String[] args) {
-		//new File(ArticleController.uploadDirectory).mkdir();
 
 		SpringApplication.run(StoreApplication.class, args);
-		/*Path path = Paths.get(ProviderController.uploadDirectory);
-		try{
-			Files.createDirectory(path);
-		}
-		catch(IOException ex){
-
-		}*/
 
 	}
 

@@ -54,7 +54,7 @@ public class AccountController {
 
     @GetMapping("enable/{id}/{email}")
     //@ResponseBody
-    public String enableUserAcount(@PathVariable ("id") int id,
+    public String enableUserAcount(@PathVariable ("id") Long id,
                                    @PathVariable ("email") String email) {
 
         //sendEmail(email, true);
@@ -66,7 +66,7 @@ public class AccountController {
 
     @GetMapping("disable/{id}/{email}")
     //@ResponseBody
-    public String disableUserAcount(@PathVariable ("id") int id,
+    public String disableUserAcount(@PathVariable ("id") Long id,
                                     @PathVariable ("email") String email) {
 
         //sendEmail(email, false);
@@ -100,7 +100,7 @@ public class AccountController {
 
     @PostMapping("updateRole")
     //@ResponseBody
-    public String UpdateUserRole(@RequestParam ("id") int id,
+    public String UpdateUserRole(@RequestParam ("id") Long id,
                                  @RequestParam ("newrole")String newRole
     ) {
 
