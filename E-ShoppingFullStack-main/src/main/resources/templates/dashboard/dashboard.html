@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}">
+    <!-- Pignose Calender -->
+    <link th:href="@{/plugins/pg-calendar/css/pignose.calendar.min.css}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" th:href="@{/plugins/chartist/css/chartist.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css}">
+    <!-- Custom Stylesheet -->
+     <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+         <div th:replace="fragments/navbarBack :: navbar"/>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div th:replace="fragments/headerBack :: header"/>
+        
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div th:replace="fragments/sidebarBack :: sidebar"/>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="card gradient-1">
+                            <div class="card-body">
+                                <h3 class="card-title text-white" th:text="#{label.providers}"></h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${nbrProviders}"></h2>
+                                    <!--<p class="text-white mb-0">Jan - March 2019</p>-->
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="card gradient-3">
+                            <div class="card-body">
+                                <h3 class="card-title text-white" th:text="#{label.articles}"></h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${nbrArticles}"></h2>
+                                    <!--<p class="text-white mb-0">Jan - March 2019</p>-->
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="card gradient-2">
+                            <div class="card-body">
+                                <h3 class="card-title text-white" th:text="#{label.soldOutProduct}"></h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${nbrSoldOutProduct}"></h2>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-battery-empty"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                     
+                <div class="row">
+                    <div class="col-lg-2 col-sm-6"  th:each="user : ${users}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="./images/user/form-user.png" class="rounded-circle" alt="">
+                                    <h5 class="mt-3 mb-1" th:text="${user.name}"></h5>
+                                    <p class="m-0" th:text="${user.email}"></p>
+                                    <p th:text="${user.roles[0].role}" th:attr="class=${user.active>0? 'm-0 greenColor' : 'm-0 redColor'}" ></p>
+                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+								<div class="col-12 ">
+									<!--<form class="form-valide" th:action="@{/article/serch}" th:object="${articleSearch}" method="post"  enctype="multipart/form-data">
+									 	<div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.label}"> <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text"  th:field="*{articleSearch.label}" class="form-control" id="val-label" name="val-label" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                  <input type="submit" class="btn btn-primary" value="Search Article">
+                                            </div>
+                                        </div>
+                                	</form>-->
+									 </div>
+                                <div class="active-member">
+                                    <div class="table-responsive">
+                                        <table class="table table-xs mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th th:text="#{label.product}"></th>
+	                                                <th th:text="#{label.description}"></th>
+	                                                <th th:text="#{label.price}"></th>
+	                                                <th th:text="#{label.inventoryQuantity}"></th>
+	                                                <th th:text="#{label.promotionalPrice}"></th>
+	                                                <th th:text="#{label.provider}"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="article : ${articles}"  >
+                                                    <td><img th:src="@{'/uploads/'+ ${article.profilePicture}}" class=" rounded-circle mr-3" alt="" > <span th:text="${article.label}"></span></td>
+                                                   
+                                                   
+                                                    <td><!--<i class="fa fa-circle-o text-success  mr-2"></i> Paid-->
+                                                    	<span th:text="${article.description}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <!--<span>Last Login</span>
+                                                        <span class="m-0 pl-3">10 sec ago</span>-->
+                                                        <span th:text="${article.price}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${article.inventoryQuantity} "th:attr="class=${article.inventoryQuantity>0? 'greenColor' : 'redColor'}"></span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <span th:text="${article.promotionalPrice}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${article.provider.name}"></span>
+                                                    </td>
+                                                </tr>
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+              
+
+                
+
+                <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="social-graph-wrapper widget-facebook">
+                                    <span class="s-icon"><i class="fa fa-facebook"></i></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border-right">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">89k</h4>
+                                            <p class="m-0">Friends</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">119k</h4>
+                                            <p class="m-0">Followers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="social-graph-wrapper widget-linkedin">
+                                    <span class="s-icon"><i class="fa fa-linkedin"></i></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border-right">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">89k</h4>
+                                            <p class="m-0">Friends</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">119k</h4>
+                                            <p class="m-0">Followers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="social-graph-wrapper widget-googleplus">
+                                    <span class="s-icon"><i class="fa fa-google-plus"></i></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border-right">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">89k</h4>
+                                            <p class="m-0">Friends</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">119k</h4>
+                                            <p class="m-0">Followers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="social-graph-wrapper widget-twitter">
+                                    <span class="s-icon"><i class="fa fa-twitter"></i></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border-right">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">89k</h4>
+                                            <p class="m-0">Friends</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                            <h4 class="m-1">119k</h4>
+                                            <p class="m-0">Followers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        
+        <div th:replace="fragments/footerBack :: footer"/>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script th:src="@{/plugins/common/common.min.js}"></script>
+    <script th:src="@{/js/custom.min.js}"></script>
+    <script th:src="@{/js/settings.js}"></script>
+    <script th:src="@{/js/gleek.js}"></script>
+    <script th:src="@{/js/styleSwitcher.js}"></script>
+
+    <!-- Chartjs -->
+    <script th:src="@{/plugins/chart.js/Chart.bundle.min.js}"></script>
+    <!-- Circle progress -->
+    <script th:src="@{/plugins/circle-progress/circle-progress.min.js}"></script>
+    <!-- Datamap -->
+    <script th:src="@{/plugins/d3v3/index.js}"></script>
+    <script th:src="@{/plugins/topojson/topojson.min.js}"></script>
+    <script th:src="@{/plugins/datamaps/datamaps.world.min.js}"></script>
+    <!-- Morrisjs -->
+    <script th:src="@{/plugins/raphael/raphael.min.js}"></script>
+    <script th:src="@{/plugins/morris/morris.min.js}"></script>
+    <!-- Pignose Calender -->
+    <script th:src="@{/plugins/moment/moment.min.js}"></script>
+    <script th:src="@{/plugins/pg-calendar/js/pignose.calendar.min.js}"></script>
+    <!-- ChartistJS -->
+    <script th:src="@{/plugins/chartist/js/chartist.min.js}"></script>
+    <script th:src="@{/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js}"></script>
+
+
+
+    <script th:src="@{/js/dashboard/dashboard-1.js}"></script>
+
+</body>
+
+</html>

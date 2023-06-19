@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+</head>
+<body>
+<div th:fragment="sidebar">
+
+    <div class="nk-sidebar">
+        <div class="nk-nav-scroll">
+            <ul class="metismenu" id="menu">
+                <li>
+                    <a th:href="@{/dashboard}" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text"  th:text="#{label.dashboard}"></span>
+                    </a>
+                </li>
+                <!--  <li class="mega-menu mega-menu-sm">
+                      <a th:href="@{/providers/list}" aria-expanded="false">
+                          <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.providers}"></span>
+                      </a>
+
+                  </li>-->
+                <!-- <li>
+                     <a th:href="@{/article/list}" aria-expanded="false">
+                         <i class="icon-envelope menu-icon"></i> <span class="nav-text" th:text="#{label.articles}"></span>
+                     </a>
+                 </li>-->
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-screen-tablet menu-icon"></i><span class="nav-text" th:text="#{label.security}"></span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a th:href="@{/accounts/list}"  th:text="#{label.users}"></a></li>
+                        <li><a th:href="@{/role/list}"  th:text="#{label.roles}"></a></li>
+                        <li><a th:href="@{/users/list}"  th:text="#{label.users}"></a></li>
+
+                    </ul>
+                </li>
+                <!--<li>
+                    <a th:href="@{/news/list}" aria-expanded="false">
+                        <i class="icon-graph menu-icon"></i> <span class="nav-text"  th:text="#{label.news}"></span>
+                    </a>
+                </li>-->
+                <!--<li>
+                    <a  th:href="@{/contact/}" aria-expanded="false">
+                        <i class="icon-grid menu-icon"></i><span class="nav-text"  th:text="#{label.contact}"></span>
+                    </a>
+                </li>-->
+                <!-- <li>
+                     <a th:href="@{/mainEntity}" aria-expanded="false">
+                         <i class="icon-badge menu-icon"></i><span class="nav-text"  th:text="#{label.mainEntity}"></span>
+                     </a>
+                 </li>-->
+                <!-- <li>
+                     <a  th:href="@{/messaging/list}" aria-expanded="false">
+                         <i class="icon-note menu-icon"></i><span class="nav-text" th:text="#{label.messaging}"></span>
+                     </a>
+
+                 </li>-->
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/users/list}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.users}"></span>
+                    </a>
+
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/departements/list}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.departement}"></span>
+                    </a>
+
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/niveau/list}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.niveau}"></span>
+                    </a>
+
+                </li>
+
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/classe/list}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.classe}"></span>
+                    </a>
+
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/emplois/list}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.emplois}"></span>
+                    </a>
+
+                </li>
+
+                <!--<li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-menu menu-icon"></i><span class="nav-text" th:text="#{label.configuration}"></span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./table-basic.html" aria-expanded="false" th:text="#{label.updatePassword}"></a></li>
+                        <li><a href="./table-datatable.html" aria-expanded="false" th:text="#{label.profile}"></a></li>
+                    </ul>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+         <div th:replace="fragments/navbarBack :: navbar"/>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+       <div th:replace="fragments/headerBack :: header"/>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div th:replace="fragments/sidebarBack :: sidebar"/>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                       <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
+                        <li class="breadcrumb-item active"><a th:href="@{/article/list}"  th:text="#{label.articleList}"></a></li>
+                         <li class="breadcrumb-item active"><a href=""  th:text="#{label.updateArticle}"></a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+									<form class="form-valide" th:action="@{/article/edit/{id}(id=${article.id})}" th:object="${article}" method="post" enctype="multipart/form-data">
+							
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.label}"> <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text"  th:field="*{label}" class="form-control" id="val-label" name="val-label" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-description" th:text="#{label.description}"> <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input  type="text"  th:field="*{description}" class="form-control" id="val-description" name="val-description" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-price" th:text="#{label.price}"> <span class="text-danger">*</span>
+                                            </label>
+                                           <div class="col-lg-6">
+                                                <input type="text"  th:field="*{price}" class="form-control" id="val-price" name="val-price" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-phone" th:text="#{label.inventoryQuantity}"> <span class="text-danger">*</span>
+                                            </label>
+                                           <div class="col-lg-6">
+                                                <input type="text"  th:field="*{inventoryQuantity}" class="form-control" id="val-inventoryQuantity" name="val-inventoryQuantity" required>
+                                            </div>
+                                        </div>
+                                         <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-promotionalPrice" th:text="#{label.promotionalPrice}"> <span class="text-danger">*</span>
+                                            </label>
+                                           <div class="col-lg-6">
+                                                <input type="text"  th:field="*{promotionalPrice}" class="form-control" id="val-promotionalPrice" name="val-promotionalPrice" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-expiryDate" th:text="#{label.expiryDate}"> <span class="text-danger">*</span>
+                                            </label>
+                                           <div class="col-lg-6">
+                                                <input type="date"  th:field="*{expiryDate}" class="form-control" id="val-expiryDate" name="val-expiryDate" >
+                                            </div>
+                                        </div>
+                                         <div class="form-group row">
+				                             <label for="provider" class="col-lg-4 col-form-label" th:text="#{label.providers}"></label>
+				                             <div class="col-lg-6">
+				                            <select name="providerId" class="form-control" required>
+									            <option disabled selected value> -- select an option -- </option>
+											    <option  th:each="pr: ${providers}" th:value="${pr.id}" th:text="${pr.name}" th:selected="(${pr.id} == ${idProvider})"/>
+											</select>
+											</div>
+										</div>
+			                            <div class="form-group row">
+                                			<label for="label" class="col-lg-4 col-form-label"  th:text="#{label.facePicture}"></label> 
+	  										<div class="col-lg-6">
+				                                <img alt="Image"  th:src="@{'/uploads/'+ ${article.facePicture}}" width="250" height="250"/>
+				 								<input name="nomImage" type="hidden" th:field="*{facePicture}" />
+ 											</div>
+                             			</div>
+                             			<div class="form-group row">
+											<label for="price" class="col-lg-4 col-form-label" th:text="#{label.newFacePicture}" ></label>
+											<div class="col-lg-6">
+												<input class="form-control" type="file" name="files" multiple>
+											</div>
+										</div>
+										<div class="form-group row">
+                                			<label for="label" class="col-lg-4 col-form-label"  th:text="#{label.profilePicture}"></label> 
+	  										<div class="col-lg-6">
+				                                <img alt="Image"  th:src="@{'/uploads/'+ ${article.profilePicture}}" width="250" height="250"/>
+				 								<input name="nomImage1" type="hidden" th:field="*{profilePicture}" />
+ 											</div>
+                             			</div>
+                             			<div class="form-group row">
+											<label for="price" class="col-lg-4 col-form-label" th:text="#{label.newProfilePicture}" ></label>
+											<div class="col-lg-6">
+												<input class="form-control" type="file" name="filesProfilePicture" multiple>
+											</div>
+										</div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                  <input type="submit" class="btn btn-primary" value="Update Article">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div th:replace="fragments/footerBack :: footer"/>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script th:src="@{/plugins/common/common.min.js}"></script>
+    <script th:src="@{/js/custom.min.js}"></script>
+    <script th:src="@{/js/settings.js}"></script>
+    <script th:src="@{/js/gleek.js}"></script>
+    <script th:src="@{/js/styleSwitcher.js}"></script>
+
+    <script th:src="@{/plugins/validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/plugins/validation/jquery.validate-init.js}"></script>
+
+
+</body>
+
+</html>
