@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!--*******************
+    Preloader start
+********************-->
+<div id="preloader">
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+        </svg>
+    </div>
+</div>
+<!--*******************
+    Preloader end
+********************-->
+
+
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div th:replace="fragments/navbarBack :: navbar"/>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+
+    <!--**********************************
+        Header start
+    ***********************************-->
+    <div th:replace="fragments/headerBack :: header"/>
+    <!--**********************************
+        Header end ti-comment-alt
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    <div th:replace="fragments/sidebarBack :: sidebar"/>
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/classe/list}"  th:text="#{label.classeList}"></a></li>
+                    <li class="breadcrumb-item active"><a href=""  th:text="#{label.addNewClasse}"></a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-validation">
+                                <form class="form-valide" th:action="@{/classe/add}" th:object="${classe}" method="post"  enctype="multipart/form-data">
+                                    <!-- <div class="form-group row">
+                                         <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.classe}"> <span class="text-danger">*</span>
+                                         </label>
+                                         <div class="col-lg-6">
+                                             <input type="text"  th:field="*{nom}" class="form-control" id="val-label" name="val-label" >
+                                             <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="text-danger"></span>
+                                         </div>
+                                     </div>-->
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.titre}"> <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select name="nom" class="form-control">
+                                                <option value="premiere A" >premiere A</option>
+                                                <option value="premiere B">premiere B</option>
+                                                <option value="premiere C">premiere C</option>
+                                                <option value="premiere D">premiere D</option>
+                                                <option value="deuxieme A" >deuxieme A</option>
+                                                <option value="deuxieme B">deuxieme B</option>
+                                                <option value="deuxieme C">deuxieme C</option>
+                                                <option value="deuxieme D">deuxieme D</option>
+                                                <option value="troisième A" >troisième A</option>
+                                                <option value="troisième B ">troisième B</option>
+                                                <option value="troisième C">troisième C</option>
+                                                <option value="troisième D">troisième D</option>
+                                                <option value="quatrième A" >quatrième A</option>
+                                                <option value="quatrième B ">quatrième B</option>
+                                                <option value="quatrième C">quatrième C</option>
+                                                <option value="quatrième D">quatrième D</option>
+                                                <option value="cinquième A" >cinquième A</option>
+                                                <option value="cinquième B ">cinquième B</option>
+                                                <option value="cinquième C">cinquième C</option>
+                                                <option value="cinquième D">cinquième D</option>
+                                                <option value="sixième A" >sixième A</option>
+                                                <option value="sixième B">sixième B</option>
+                                                <option value="sixième C">sixième C</option>
+                                                <option value="sixième D">sixième D</option>
+                                                <option value="septième">septième</option>
+                                                <option value="huitième">huitième</option>
+                                                <option value="neuvième">neuvième</option>
+                                                <option value="premieresecondaire" >premieresecondaire</option>
+                                                <option value="deuxiemesecondaire ">deuxiemesecondaire </option>
+                                                <option value="troisièmesecondaire">troisièmesecondaire</option>
+                                                <option value="quatrièmesecondaire">quatrièmesecondaire</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="niveau" class="col-lg-4 col-form-label" th:text="#{label.niv}"></label>
+                                        <div class="col-lg-6">
+                                            <select name="niveauId" class="form-control" >
+                                                <option disabled selected value> -- select an option -- </option>
+                                                <option  th:each="pr: ${niveau}" th:value="${pr.id}" th:text="${pr.nom}" />
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <input type="submit" class="btn btn-primary" value="ajouter Classe">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div th:replace="fragments/footerBack :: footer"/>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+<!--**********************************
+    Scripts
+***********************************-->
+<script th:src="@{/plugins/common/common.min.js}"></script>
+<script th:src="@{/js/custom.min.js}"></script>
+<script th:src="@{/js/settings.js}"></script>
+<script th:src="@{/js/gleek.js}"></script>
+<script th:src="@{/js/styleSwitcher.js}"></script>
+
+<script th:src="@{/plugins/validation/jquery.validate.min.js}"></script>
+<script th:src="@{/plugins/validation/jquery.validate-init.js}"></script>
+
+
+</body>
+
+</html>
