@@ -69,7 +69,7 @@
             <div class="col p-md-0">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
-                    <li class="breadcrumb-item active"><a th:href="@{/users/list}"  th:text="#{label.userList}"></a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/users/list}"  th:text="#{label.listdeseleve}"></a></li>
                     <li class="breadcrumb-item active"><a href=""  th:text="#{label.addNewUser}"></a></li>
                 </ol>
             </div>
@@ -87,7 +87,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.email}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{email}" class="form-control" id="val-name" name="val-username" th:attr="placeholder=#{label.email}" >
+                                            <input type="text"  th:field="*{email}" class="form-control" id="val-name" name="val-username"  >
                                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-email" th:text="#{label.password}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input  type="text"  th:field="*{password}" class="form-control" id="val-email" name="val-email" th:attr="placeholder=#{label.password}">
+                                            <input  type="text"  th:field="*{password}" class="form-control" id="val-email" name="val-email" >
                                             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-address" th:text="#{label.userName}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{username}" class="form-control" id="val-address" name="val-address" th:attr="placeholder=#{label.userName}">
+                                            <input type="text"  th:field="*{username}" class="form-control" id="val-address" name="val-address" >
                                             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-address" th:text="#{label.adresse}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{adresse}" class="form-control" id="val-address" name="val-address" th:attr="placeholder=#{label.adresse}">
+                                            <input type="text"  th:field="*{adresse}" class="form-control" id="val-address" name="val-address" >
                                             <span th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-phone" th:text="#{label.nom}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{nom}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.nom}">
+                                            <input type="text"  th:field="*{nom}" class="form-control" id="val-phone" name="val-phone" >
                                             <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-phone" th:text="#{label.prenom}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{prenom}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.prenom}">
+                                            <input type="text"  th:field="*{prenom}" class="form-control" id="val-phone" name="val-phone" >
                                             <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                         <label class="col-lg-4 col-form-label" for="val-phone" th:text="#{label.genre}"> <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text"  th:field="*{genre}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.genre}">
+                                            <input type="text"  th:field="*{genre}" class="form-control" id="val-phone" name="val-phone" >
                                             <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
 
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
-                                            <input type="submit" class="btn btn-primary" value="Add User">
+                                            <input type="submit" class="btn btn-primary" value="ajouter Eleve">
                                         </div>
                                     </div>
                                 </form>

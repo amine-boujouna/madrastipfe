@@ -9,11 +9,11 @@
     <div class="nk-sidebar">
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
-                <li>
+               <!-- <li>
                     <a th:href="@{/dashboard}" aria-expanded="false">
                         <i class="icon-speedometer menu-icon"></i><span class="nav-text"  th:text="#{label.dashboard}"></span>
                     </a>
-                </li>
+                </li>-->
                <!-- <li class="mega-menu mega-menu-sm">
                       <a th:href="@{/providers/list}" aria-expanded="false">
                           <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.providers}"></span>
@@ -25,7 +25,7 @@
                          <i class="icon-envelope menu-icon"></i> <span class="nav-text" th:text="#{label.articles}"></span>
                      </a>
                  </li>-->
-                <li>
+              <!--  <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="icon-screen-tablet menu-icon"></i><span class="nav-text" th:text="#{label.security}"></span>
                     </a>
@@ -35,7 +35,7 @@
                         <li><a th:href="@{/users/list}"  th:text="#{label.users}"></a></li>
 
                     </ul>
-                </li>
+                </li>-->
                 <!--<li>
                     <a th:href="@{/news/list}" aria-expanded="false">
                         <i class="icon-graph menu-icon"></i> <span class="nav-text"  th:text="#{label.news}"></span>
@@ -60,6 +60,18 @@
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/users/list}" aria-expanded="false">
                         <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.ajouteretudiant}"></span>
+                    </a>
+
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/users/listProfesseur}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.addprofesseur}"></span>
+                    </a>
+
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/users/listAdministrateur}" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.addadministrateur}"></span>
                     </a>
 
                 </li>

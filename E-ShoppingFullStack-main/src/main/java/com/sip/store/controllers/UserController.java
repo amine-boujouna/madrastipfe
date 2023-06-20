@@ -62,26 +62,32 @@ public class UserController {
     @GetMapping("list")
     //@ResponseBody
     public String listUser(Model model) {
-
-
-      /*  List<User> la = (List<User>)userRepository.findAll();
-        if(la.size()==0)
-            la=null;
-        model.addAttribute("user", la);
-
-       */
         List<User> userList = (List<User>) userRepository.findAll();
         if (userList.isEmpty()) {
             userList = null;
         }
         model.addAttribute("user", userList);
-
-        // Ajouter le code de débogage pour afficher la valeur de user.getPhoto()
-      //  for (User user : userList) {
-        //    System.out.println("Photo: " + user.getPhoto());
-        //}
         return "users/listUser";
-
+    }
+    @GetMapping("listProfesseur")
+    //@ResponseBody
+    public String listProfessuer(Model model) {
+        List<User> userList = (List<User>) userRepository.findAll();
+        if (userList.isEmpty()) {
+            userList = null;
+        }
+        model.addAttribute("user", userList);
+        return "Professeur/listProfesseur";
+    }
+    @GetMapping("listAdministrateur")
+    //@ResponseBody
+    public String listAdministrateur(Model model) {
+        List<User> userList = (List<User>) userRepository.findAll();
+        if (userList.isEmpty()) {
+            userList = null;
+        }
+        model.addAttribute("user", userList);
+        return "Administrateur/listAdministrateur";
     }
 
     @GetMapping("add")
@@ -89,6 +95,18 @@ public class UserController {
         User user = new User();// object dont la valeur des attributs par defaut
         model.addAttribute("user", user);
         return "users/addUser";
+    }
+    @GetMapping("addProfesseur")
+    public String showAddProfForm(Model model) {
+        User user = new User();// object dont la valeur des attributs par defaut
+        model.addAttribute("user", user);
+        return "Professeur/addProfesseur";
+    }
+    @GetMapping("addAdministrateur")
+    public String showAddAdminForm(Model model) {
+        User user = new User();// object dont la valeur des attributs par defaut
+        model.addAttribute("user", user);
+        return "Administrateur/addAdministrateur";
     }
 
     @PostMapping("add")
@@ -125,6 +143,75 @@ public class UserController {
 
         return "redirect:list";
     }
+    @PostMapping("addProfesseur")
+    public String addProfesseur(@Valid User user, @RequestParam("files") MultipartFile[] files)  {
+
+        StringBuilder fileName = new StringBuilder();
+        MultipartFile file = files[0];
+        Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+        fileName.append(file.getOriginalFilename());
+        System.out.println("Path: " + fileNameAndPath.toAbsolutePath().toString());
+        // Vérification et création du répertoire si nécessaire
+        Path directoryPath = fileNameAndPath.getParent();
+        if (!Files.exists(directoryPath)) {
+            try {
+                Files.createDirectories(directoryPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Gérer l'erreur de création du répertoire
+            }
+        }
+        try {
+            Files.write(fileNameAndPath, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gérer l'erreur d'écriture du fichier
+        }
+        user.setPhoto(fileName.toString());
+        user.setActive(0);
+        Role userRole = roleRepository.findByRole("Professeur");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+        userRepository.save(user);
+
+
+        return "redirect:listProfesseur";
+    }
+    @PostMapping("addAdministrateur")
+    public String addAdministrateur(@Valid User user, @RequestParam("files") MultipartFile[] files)  {
+
+        StringBuilder fileName = new StringBuilder();
+        MultipartFile file = files[0];
+        Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+        fileName.append(file.getOriginalFilename());
+        System.out.println("Path: " + fileNameAndPath.toAbsolutePath().toString());
+        // Vérification et création du répertoire si nécessaire
+        Path directoryPath = fileNameAndPath.getParent();
+        if (!Files.exists(directoryPath)) {
+            try {
+                Files.createDirectories(directoryPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Gérer l'erreur de création du répertoire
+            }
+        }
+        try {
+            Files.write(fileNameAndPath, file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gérer l'erreur d'écriture du fichier
+        }
+        user.setPhoto(fileName.toString());
+        user.setActive(0);
+        Role userRole = roleRepository.findByRole("SUPERADMIN");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+        userRepository.save(user);
+
+
+        return "redirect:listAdministrateur";
+    }
+
 
 
 
@@ -133,13 +220,20 @@ public class UserController {
     @Transactional
     @GetMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
-/*
-        User user = userRepository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("Invalid user Id:" + id));
-
-        userRepository.delete(user);*/
         userRepository.deleteuser(id);
         return "redirect:../list";
+    }
+    @Transactional
+    @GetMapping("deleteProfesseur/{id}")
+    public String deleteProfesseur(@PathVariable("id") long id, Model model) {
+        userRepository.deleteuser(id);
+        return "redirect:../listProfesseur";
+    }
+    @Transactional
+    @GetMapping("deleteAdministrateur/{id}")
+    public String deleteAdministrateur(@PathVariable("id") long id, Model model) {
+        userRepository.deleteuser(id);
+        return "redirect:../listAdministrateur";
     }
 
 
@@ -147,16 +241,24 @@ public class UserController {
     public String showUserFormToUpdate(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
-
         model.addAttribute("user", user);
-
         return "users/updateUser";
     }
 
-
-
-
-
+    @GetMapping("editProfesseur/{id}")
+    public String showProfesseurFormToUpdate(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+        return "Professeur/updateProfesseur";
+    }
+    @GetMapping("editAdministrateur/{id}")
+    public String showAdministrateurFormToUpdate(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+        return "Administrateur/updateAdministrateur";
+    }
     @PostMapping("update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -165,7 +267,24 @@ public class UserController {
         }
         userRepository.save(user);
         return "redirect:../list";
-
+    }
+    @PostMapping("updateProfesseur/{id}")
+    public String updateProfesseur(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            return "Professeur/updateProfesseur";
+        }
+        userRepository.save(user);
+        return "redirect:../list";
+    }
+    @PostMapping("updateAdministrateur/{id}")
+    public String updateAdministrateur(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            return "Administrateur/updateAdministrateur";
+        }
+        userRepository.save(user);
+        return "redirect:../listAdministrateur";
     }
 
 
@@ -175,6 +294,20 @@ public class UserController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
         return "users/showUser";
+    }
+    @GetMapping("showProfesseur/{id}")
+    public String showProfesseur(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+        return "Professeur/showProfesseur";
+    }
+    @GetMapping("showAdministrateur/{id}")
+    public String showAdministrateur(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+        return "Administrateur/showAdministrateur";
     }
 
 

@@ -69,7 +69,7 @@
             <div class="col p-md-0">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
-                    <li class="breadcrumb-item active"><a href=""  th:text="#{label.listdeseleve}"></a></li>
+                    <li class="breadcrumb-item active"><a href=""  th:text="#{label.listprofesseur}"></a></li>
                 </ol>
             </div>
         </div>
@@ -82,10 +82,10 @@
                         <div class="card-body">
                             <div class="row col-12">
                                 <div class="col-8">
-                                    <h4 class="card-title" th:text="#{label.listdeseleve}"></h4>
+                                    <h4 class="card-title" th:text="#{label.listprofesseur}"></h4>
                                 </div>
                                 <div class="col-4 float-right">
-                                    <a th:href="@{../users/add}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right" th:text="#{label.ajouteretudiant}"><i
+                                    <a th:href="@{../users/addProfesseur}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right" th:text="#{label.addprofesseur}"><i
                                             class="fa fa-plus fa-sm text-white-50 pr-1 "></i></a>
                                 </div>
                             </div>
@@ -105,8 +105,6 @@
                                         <th th:text="#{label.specialite}"></th>
                                         <th th:text="#{label.biographie}"></th>
                                         <th th:text="#{label.salaire}"></th>
-                                        <th th:text="#{label.nompere}"></th>
-                                        <th th:text="#{label.nommere}"></th>
                                         <th th:text="#{label.photo}"></th>
                                         <th th:text="#{label.view}"></th>
                                         <th th:text="#{label.update}"></th>
@@ -126,13 +124,11 @@
                                         <td th:text="${user.specialite}"></td>
                                         <td th:text="${user.biographie}"></td>
                                         <td th:text="${user.salaire}"></td>
-                                        <td th:text="${user.nompere}"></td>
-                                        <td th:text="${user.nommere}"></td>
                                         <td> <img alt="Image" th:src="@{'/uploads/'+ ${user.photo}}" width="250" height="250"/></td>
 
-                                        <td><a th:href="@{/users/show/{id}(id=${user.id})}" class="btn btn-primary"><i class="fa fa-eye ml-2"></i></a></td>
-                                        <td><a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-warning" title="Mise à jour"><i class="fa fa-edit ml-2"></i> </a></td>
-                                        <td><a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger" title="Supprimer"><i class="fa fa-user-times ml-2"> </a></td>
+                                        <td><a th:href="@{/users/showProfesseur/{id}(id=${user.id})}" class="btn btn-primary"><i class="fa fa-eye ml-2"></i></a></td>
+                                        <td><a th:href="@{/users/editProfesseur/{id}(id=${user.id})}" class="btn btn-warning" title="Mise à jour"><i class="fa fa-edit ml-2"></i> </a></td>
+                                        <td><a th:href="@{/users/deleteProfesseur/{id}(id=${user.id})}" class="btn btn-danger" title="Supprimer"><i class="fa fa-user-times ml-2"> </a></td>
                                     </tr>
 
 
