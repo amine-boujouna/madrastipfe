@@ -119,15 +119,7 @@ public class UserController {
         user.setActive(0);
         Role userRole = roleRepository.findByRole("Eleve");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        String recipient = user.getEmail();
-        String subject = "Nouvel utilisateur créé";
-        String body = "Nom d'utilisateur: " + user.getUsername() + "\nMot de passe: " + user.getPassword();
-        try {
-            EmailUtil.sendEmail(recipient, subject, body);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            // Gérer les erreurs d'envoi d'e-mail
-        }
+
         userRepository.save(user);
 
 
