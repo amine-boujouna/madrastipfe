@@ -2,6 +2,7 @@ package com.sip.store.services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +14,10 @@ import java.util.stream.Stream;
 import com.sip.store.entities.FileDB;
 import com.sip.store.repositories.FileDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,29 +27,9 @@ public class FileStorageService {
 
     @Autowired
     private FileDBRepository fileDBRepository;
-    private final Path root = Paths.get("./uploads");
-    public FileDB store(MultipartFile file) throws IOException {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+    private final Path root = Paths.get("C:/work/madrastipfe/E-ShoppingFullStack-main/src/uploads");
 
-        return fileDBRepository.save(FileDB);
-    }
 
-    public FileDB getFile(String id) {
-        return fileDBRepository.findById(id).get();
-    }
-
-    public Stream<FileDB> getAllFiles() {
-        return fileDBRepository.findAll().stream();
-    }
-
-    public void init() {
-        try {
-            Files.createDirectories(root);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
-        }
-    }
     public FileDB deletefile(String idfile)
     {
         FileDB temp = null;
@@ -84,9 +68,15 @@ public class FileStorageService {
             throw new FileNotFoundException("Le fichier avec l'ID " + fileId + " n'a pas été trouvé.");
         }
     }
-    public List<FileDB> getAllFilesdb(){
-        return fileDBRepository.findAll();
+
+    public void init() {
+        try {
+            Files.createDirectories(root);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize folder for upload!");
+        }
     }
+
     public void save(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
@@ -98,6 +88,26 @@ public class FileStorageService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public Resource load(String filename) {
+        try {
+            Path file = root.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(root.toFile());
+    }
+
     public Stream<Path> loadAll() {
         try {
             return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
@@ -106,3 +116,4 @@ public class FileStorageService {
         }
     }
 }
+
