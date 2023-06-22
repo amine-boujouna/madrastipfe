@@ -28,10 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -48,15 +45,14 @@ public class UserController {
     @Autowired
     FileStorageService storageService;
 
-    public static String uploadDirectory =  "C:/work/madrastipfe/E-ShoppingFullStack-main/src/main/resources/static/uploads";
+    public static String uploadDirectory = "C:/work/madrastipfe/E-ShoppingFullStack-main/src/main/resources/static/uploads";
 
     @Autowired
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,RoleRepository roleRepository) {
+    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
     }
-
 
 
     @GetMapping("list")
@@ -69,6 +65,7 @@ public class UserController {
         model.addAttribute("user", userList);
         return "users/listUser";
     }
+
     @GetMapping("listProfesseur")
     //@ResponseBody
     public String listProfessuer(Model model) {
@@ -79,6 +76,7 @@ public class UserController {
         model.addAttribute("user", userList);
         return "Professeur/listProfesseur";
     }
+
     @GetMapping("listAdministrateur")
     //@ResponseBody
     public String listAdministrateur(Model model) {
@@ -96,12 +94,14 @@ public class UserController {
         model.addAttribute("user", user);
         return "users/addUser";
     }
+
     @GetMapping("addProfesseur")
     public String showAddProfForm(Model model) {
         User user = new User();// object dont la valeur des attributs par defaut
         model.addAttribute("user", user);
         return "Professeur/addProfesseur";
     }
+
     @GetMapping("addAdministrateur")
     public String showAddAdminForm(Model model) {
         User user = new User();// object dont la valeur des attributs par defaut
@@ -110,7 +110,7 @@ public class UserController {
     }
 
     @PostMapping("add")
-    public String addUser(@Valid User user, @RequestParam("files") MultipartFile[] files)  {
+    public String addUser(@Valid User user, @RequestParam("files") MultipartFile[] files) {
 
         StringBuilder fileName = new StringBuilder();
         MultipartFile file = files[0];
@@ -143,8 +143,9 @@ public class UserController {
 
         return "redirect:list";
     }
+
     @PostMapping("addProfesseur")
-    public String addProfesseur(@Valid User user, @RequestParam("files") MultipartFile[] files)  {
+    public String addProfesseur(@Valid User user, @RequestParam("files") MultipartFile[] files) {
 
         StringBuilder fileName = new StringBuilder();
         MultipartFile file = files[0];
@@ -177,8 +178,9 @@ public class UserController {
 
         return "redirect:listProfesseur";
     }
+
     @PostMapping("addAdministrateur")
-    public String addAdministrateur(@Valid User user, @RequestParam("files") MultipartFile[] files)  {
+    public String addAdministrateur(@Valid User user, @RequestParam("files") MultipartFile[] files) {
 
         StringBuilder fileName = new StringBuilder();
         MultipartFile file = files[0];
@@ -213,22 +215,20 @@ public class UserController {
     }
 
 
-
-
-
-
     @Transactional
     @GetMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         userRepository.deleteuser(id);
         return "redirect:../list";
     }
+
     @Transactional
     @GetMapping("deleteProfesseur/{id}")
     public String deleteProfesseur(@PathVariable("id") long id, Model model) {
         userRepository.deleteuser(id);
         return "redirect:../listProfesseur";
     }
+
     @Transactional
     @GetMapping("deleteAdministrateur/{id}")
     public String deleteAdministrateur(@PathVariable("id") long id, Model model) {
@@ -240,7 +240,7 @@ public class UserController {
     @GetMapping("edit/{id}")
     public String showUserFormToUpdate(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
         return "users/updateUser";
     }
@@ -248,42 +248,114 @@ public class UserController {
     @GetMapping("editProfesseur/{id}")
     public String showProfesseurFormToUpdate(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
         return "Professeur/updateProfesseur";
     }
+
     @GetMapping("editAdministrateur/{id}")
     public String showAdministrateurFormToUpdate(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
         return "Administrateur/updateAdministrateur";
     }
+
     @PostMapping("update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
             return "users/updateUser";
         }
-        userRepository.save(user);
+        User profile = null;
+        Optional<User> user1 = userRepository.findById(id);
+        if (user1.isPresent()) {
+            profile = user1.get();
+            profile.setEmail(user.getEmail());
+            profile.setGenre(user.getGenre());
+            profile.setNom(user.getNom());
+            profile.setPrenom(user.getPrenom());
+            profile.setAdresse(user.getAdresse());
+            profile.setBiographie(user.getBiographie());
+            profile.setSalaire(user.getSalaire());
+            profile.setSpecialite(user.getSpecialite());
+            profile.setTel(user.getTel());
+            profile.setUsername(user.getUsername());
+            profile.setPassword(user.getPassword());
+            profile.setNommere(user.getNommere());
+            profile.setNompere(user.getNompere());
+            userRepository.save(profile);
+        }
         return "redirect:../list";
     }
+
     @PostMapping("updateProfesseur/{id}")
-    public String updateProfesseur(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
+    public String updateProfesseur(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model, @RequestParam("files") MultipartFile[] files) {
         if (result.hasErrors()) {
             user.setId(id);
             return "Professeur/updateProfesseur";
         }
-        userRepository.save(user);
-        return "redirect:../list";
-    }
+        User profile = null;
+        Optional<User> user1 = userRepository.findById(id);
+        if (user1.isPresent()) {
+            profile = user1.get();
+            profile.setEmail(user.getEmail());
+            profile.setGenre(user.getGenre());
+            profile.setNom(user.getNom());
+            profile.setPrenom(user.getPrenom());
+            profile.setAdresse(user.getAdresse());
+            profile.setBiographie(user.getBiographie());
+            profile.setSalaire(user.getSalaire());
+            profile.setSpecialite(user.getSpecialite());
+            profile.setTel(user.getTel());
+            profile.setUsername(user.getUsername());
+            profile.setPassword(user.getPassword());
+
+            StringBuilder fileName = new StringBuilder();
+            MultipartFile file = files[0];
+            //System.out.println(file.isEmpty());
+            if (!file.isEmpty()) {
+                Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+
+                fileName.append(file.getOriginalFilename());
+                try {
+                    Files.write(fileNameAndPath, file.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                user.setPhoto(fileName.toString());
+            }
+
+            userRepository.save(profile);
+        }
+            return "redirect:../listProfesseur";
+        }
+
     @PostMapping("updateAdministrateur/{id}")
     public String updateAdministrateur(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
             return "Administrateur/updateAdministrateur";
         }
-        userRepository.save(user);
+        User profile = null;
+        Optional<User> user1 = userRepository.findById(id);
+        if (user1.isPresent()) {
+            profile = user1.get();
+            profile.setEmail(user.getEmail());
+            profile.setGenre(user.getGenre());
+            profile.setNom(user.getNom());
+            profile.setPrenom(user.getPrenom());
+            profile.setAdresse(user.getAdresse());
+            profile.setBiographie(user.getBiographie());
+            profile.setSalaire(user.getSalaire());
+            profile.setSpecialite(user.getSpecialite());
+            profile.setTel(user.getTel());
+            profile.setUsername(user.getUsername());
+            profile.setPassword(user.getPassword());
+            profile.setNommere(user.getNommere());
+            profile.setNompere(user.getNompere());
+            userRepository.save(profile);
+        }
         return "redirect:../listAdministrateur";
     }
 
