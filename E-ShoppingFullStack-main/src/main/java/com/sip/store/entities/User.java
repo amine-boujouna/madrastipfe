@@ -229,5 +229,28 @@ public class User {
 		this.roles = roles;
 	}
 
-
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", username='" + username + '\'' +
+				", tel=" + tel +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", active=" + active +
+				", adresse='" + adresse + '\'' +
+				", specialite='" + specialite + '\'' +
+				", photo='" + photo + '\'' +
+				", biographie='" + biographie + '\'' +
+				", salaire=" + salaire +
+				", nompere='" + nompere + '\'' +
+				", nommere='" + nommere + '\'' +
+				", age=" + age +
+				", genre='" + genre + '\'' +
+				", temp='" + temp + '\'' +
+				", roles=" + roles +
+				'}';
+	}
 }

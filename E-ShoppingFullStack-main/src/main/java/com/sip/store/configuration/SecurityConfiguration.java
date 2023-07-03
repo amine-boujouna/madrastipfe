@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
@@ -37,9 +39,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
 
-        http.
+
+                http.csrf().
+                disable().
                 authorizeRequests()
-                .antMatchers("/").permitAll() // accès pour tous users
+                .antMatchers("/").permitAll().antMatchers("/role/Add").permitAll()
+                .antMatchers("/basicauth").permitAll()
+                        .antMatchers("/getuserbyusername/{username}").permitAll()
+                        .antMatchers("/imgprofile/{id}").permitAll()
+                        .antMatchers("/profile/{id}").permitAll()
+                        .antMatchers("/file/{filename:.+}").permitAll()
+                .antMatchers("/role/list").permitAll()
+                .antMatchers("/Registration").permitAll()
+                .antMatchers("/upload").permitAll()
+                .antMatchers("/files").permitAll()
+                .antMatchers("/files/{id}").permitAll()
+                .antMatchers("/files/{filename:.+}").permitAll()
+                .antMatchers("/Getemplois").permitAll()
+                .antMatchers("/delete/{id}").permitAll()
+                .antMatchers("/update/{fileId}").permitAll()
+                .antMatchers("/getallfiledb").permitAll()
+                .antMatchers("/getfilebyid/{id}").permitAll()
+                .antMatchers("/api/profile").permitAll()
+                .antMatchers("/api/getAll").permitAll()
+                .antMatchers("/api/profile/{id}").permitAll()
+                .antMatchers("/api/imgprofile/{id}").permitAll()
                 .antMatchers("/login").permitAll() // accès pour tous users
                 .antMatchers("/registration").permitAll() // accès pour tous users
                 .antMatchers("/role/**").hasAnyAuthority("SUPERADMIN")
@@ -49,22 +73,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/article/edit/**").hasAnyAuthority("ADMIN","SUPERADMIN")
                 .antMatchers("/article/delete/**").hasAnyAuthority("ADMIN","SUPERADMIN")
                 .antMatchers("/article/show/**").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
-                .antMatchers("/article/list").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT").anyRequest()
-                .authenticated().and().csrf().disable().formLogin() // l'accès de fait via un formulaire
-                
-                .loginPage("/login").failureUrl("/login?error=true") // fixer la page login
-                
-                .defaultSuccessUrl("/dashboard") // page d'accueil après login avec succès
-                .usernameParameter("email") // paramètres d'authentifications login et password
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // route de deconnexion ici /logut
-                .logoutSuccessUrl("/login").and().exceptionHandling() // une fois deconnecté redirection vers login
-                
-                .accessDeniedPage("/403"); 
+                .antMatchers("/article/list").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-   // laisser l'accès aux ressources
+
+    // laisser l'accès aux ressources
     @Override
     public void configure(WebSecurity web) throws Exception {   // méthode responsable de l'acces aux ressources
         web

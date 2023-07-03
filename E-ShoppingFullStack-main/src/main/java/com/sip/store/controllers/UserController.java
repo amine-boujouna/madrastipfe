@@ -2,34 +2,25 @@ package com.sip.store.controllers;
 
 import com.sip.store.entities.*;
 import com.sip.store.repositories.ClasseRepository;
-import com.sip.store.repositories.DepartementRepository;
 import com.sip.store.repositories.RoleRepository;
 import com.sip.store.repositories.UserRepository;
 import com.sip.store.services.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users/")
@@ -37,8 +28,7 @@ public class UserController {
 
     private final UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private ClasseRepository classeRepository;
+
 
     private RoleRepository roleRepository;
     private JavaMailSender mailSender;
@@ -381,6 +371,7 @@ public class UserController {
         model.addAttribute("user", user);
         return "Administrateur/showAdministrateur";
     }
+
 
 
 

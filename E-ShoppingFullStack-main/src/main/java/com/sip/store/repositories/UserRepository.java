@@ -14,6 +14,8 @@ import com.sip.store.entities.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
+    @Query("from User u  where u.username= ?1")
+    User findByUsername(String username);
     
     @Query("FROM Messaging m WHERE m.recipient = ?1")
     List<Messaging> findMessaginngByUser(long id);

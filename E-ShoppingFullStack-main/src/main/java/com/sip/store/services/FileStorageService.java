@@ -28,6 +28,8 @@ public class FileStorageService {
     @Autowired
     private FileDBRepository fileDBRepository;
     private final Path root = Paths.get("C:/work/madrastipfe/E-ShoppingFullStack-main/src/uploads");
+    private final Path roott = Paths.get("C:/work/madrastipfe/E-ShoppingFullStack-main/src/main/resources/static/uploads");
+
 
 
     public FileDB deletefile(String idfile)
@@ -104,6 +106,20 @@ public class FileStorageService {
         }
     }
 
+    public Resource loadd(String filename) {
+        try {
+            Path file = roott.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
     }
