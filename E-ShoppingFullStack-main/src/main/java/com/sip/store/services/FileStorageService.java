@@ -31,7 +31,21 @@ public class FileStorageService {
     private final Path roott = Paths.get("C:/work/madrastipfe/E-ShoppingFullStack-main/src/main/resources/static/uploads");
 
 
+    public FileDB store(MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
 
+        return fileDBRepository.save(FileDB);
+    }
+    public Stream<FileDB> getAllFiles() {
+        return fileDBRepository.findAll().stream();
+    }
+    public List<FileDB> getAllFilesdb(){
+        return fileDBRepository.findAll();
+    }
+    public FileDB getFile(String id) {
+        return fileDBRepository.findById(id).get();
+    }
     public FileDB deletefile(String idfile)
     {
         FileDB temp = null;
