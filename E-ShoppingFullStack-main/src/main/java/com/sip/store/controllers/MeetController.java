@@ -1,9 +1,9 @@
 package com.sip.store.controllers;
 
 import com.sip.store.entities.Meet;
-import com.sip.store.entities.User;
 import com.sip.store.exception.ResourceNotFoundException;
 import com.sip.store.repositories.MeetReposiotry;
+import com.sip.store.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,9 @@ import java.util.Optional;
 public class MeetController {
     @Autowired
     MeetReposiotry meetReposiotry;
+    @Autowired
+    UserRepository userRepository;
+
     @PostMapping("/ajouterMeet")
      public Meet Ajoutermeet(@RequestBody  Meet meet) throws ParseException {
         String heureDebutStr = meet.getHeuredebut();
@@ -78,4 +81,14 @@ public class MeetController {
                 .orElseThrow(() -> new ResourceNotFoundException("Profrile not found for this id :: " + Id));
         return ResponseEntity.ok().body(meet);
     }
+
+    @GetMapping("/getuserwithclasse")
+     public List<Object[]> getuserbyclasse(){
+      return userRepository.getUsersWithClasses();
+     }
+
+     @GetMapping("/getlienmeet")
+     public List<Object[]>  getlienmeet(){
+        return meetReposiotry.getLienmeet();
+     }
 }

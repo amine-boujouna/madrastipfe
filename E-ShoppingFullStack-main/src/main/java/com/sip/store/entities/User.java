@@ -1,5 +1,6 @@
 package com.sip.store.entities;
 
+import java.util.List;
 import java.util.Set;
 
 import java.util.Set;
@@ -77,6 +78,8 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<Classe> classeList;
 	public long getId() {
 		return id;
 	}
@@ -227,6 +230,14 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Set<Classe> getClasseList() {
+		return classeList;
+	}
+
+	public void setClasseList(Set<Classe> classeList) {
+		this.classeList = classeList;
 	}
 
 	@Override

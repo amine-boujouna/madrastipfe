@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>E-Shopping - Centre commercial En ligne</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}">
     <!-- Custom Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
@@ -68,9 +68,8 @@
         <div class="row page-titles mx-0">
             <div class="col p-md-0">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a th:href="@{/dashboard}"  th:text="#{label.dashboard}"></a></li>
-                    <li class="breadcrumb-item active"><a th:href="@{/classe/list}"  th:text="#{label.classeList}"></a></li>
-                    <li class="breadcrumb-item active"><a href=""  th:text="#{label.viewClasse}"></a></li>
+
+                    <li class="nav-item"><a class="nav-link" th:href="@{/getreglement}">afficher reglement</a></li>
                 </ol>
             </div>
         </div>
@@ -82,44 +81,49 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-validation">
-                                <form class="form-valide" th:action="@{/classe/add}" th:object="${classe}" method="post">
-                                    <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.nom}"> <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <input type="text"  th:field="*{nomc}" class="form-control" id="val-label" name="val-label" readonly>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <label for="niveau" class="col-lg-4 col-form-label" th:text="#{label.niveau}"></label>
-                                        <div class="col-lg-6">
-                                            <input type="text"  th:field="*{niveau.nom}" class="form-control" id="val-provider" name="val-provider" readonly >
-                                        </div>
-                                    </div>
-
+                                <form
+                                        id="uploadForm"
+                                        method="post"
+                                        th:action="@{/ajouterreglements}"
+                                        enctype="multipart/form-data">
+                                    <input id="input-file" type="file" name="file" />
+                                    <button class="btn btn-sm btn-outline-success float-right" type="submit">
+                                        Upload
+                                    </button>
                                 </form>
+
+                                <div
+                                        th:if="${message != null}"
+                                        class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
+                                        role="alert">
+                                    [[${message}]]
+                                    <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- #/ container -->
     </div>
-    <!--**********************************
-        Content body end
-    ***********************************-->
+    <!-- #/ container -->
+</div>
+
+<!--**********************************
+    Content body end
+***********************************-->
 
 
-    <!--**********************************
-        Footer start
-    ***********************************-->
-    <div th:replace="fragments/footerBack :: footer"/>
-    <!--**********************************
-        Footer end
-    ***********************************-->
+<!--**********************************
+    Footer start
+***********************************-->
+<div th:replace="fragments/footerBack :: footer"/>
+<!--**********************************
+    Footer end
+***********************************-->
 </div>
 <!--**********************************
     Main wrapper end

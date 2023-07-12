@@ -203,6 +203,15 @@
                                             <span th:if="${#fields.hasErrors('nommere')}" th:errors="*{nommere}" class="text-danger"></span>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="classe" class="col-lg-4 col-form-label" th:text="#{label.class}"></label>
+                                        <div class="col-lg-6">
+                                            <select name="classeId" class="form-control" >
+                                                <option disabled selected value> -- select an option -- </option>
+                                                <option  th:each="pr: ${classes}" th:value="${pr.id}" th:text="${pr.nomc}" />
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">

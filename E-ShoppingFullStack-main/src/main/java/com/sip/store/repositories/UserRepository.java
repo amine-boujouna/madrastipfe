@@ -25,4 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
    @Modifying
    @Query("delete from User u where u.id=:id")
    void deleteuser(Long id);
+    //@Query("SELECT u.nom, u.prenom, c.nomc FROM User u JOIN u.classeList c")
+    @Query("SELECT u.nom AS nom, u.prenom AS prenom, c.nomc AS nomc FROM User u JOIN u.classeList c")
+    List<Object[]> getUsersWithClasses();
 }

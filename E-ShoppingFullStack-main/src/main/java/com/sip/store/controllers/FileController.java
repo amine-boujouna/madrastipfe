@@ -73,6 +73,14 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
     }
+    @GetMapping("/reglements/{id}")
+    public ResponseEntity<byte[]> getfile(@PathVariable String id) {
+        FileDB fileDB = storageService.getfile(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
+    }
     @DeleteMapping("/Delete/{id}")
     public FileDB deleteFile(@PathVariable String id) {
         return storageService.deletefile(id);
@@ -98,4 +106,15 @@ public class FileController {
             return new FileInfo(filename, url);
         }).collect(Collectors.toList());
     }
+    @GetMapping("/GetReglements")
+    public List<FileInfo> Getreglements() {
+        return storageService.loadAllreglements().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(FileController.class, "getfile", path.getFileName().toString()).build().toString();
+
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+    }
+
 }

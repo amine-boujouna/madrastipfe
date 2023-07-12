@@ -12,8 +12,8 @@ public class Classe {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @NotBlank(message = "nom is mandatory")
-    @Column(name = "nom")
-    private String nom;
+    @Column(name = "nomc")
+    private String nomc;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "niveau_id", nullable = false)
@@ -28,12 +28,12 @@ public class Classe {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNomc() {
+        return nomc;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomc(String nomc) {
+        this.nomc = nomc;
     }
 
     public Niveau getNiveau() {
