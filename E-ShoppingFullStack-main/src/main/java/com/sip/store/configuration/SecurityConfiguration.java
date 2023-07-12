@@ -39,40 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
 
-
-        http.csrf().
-                disable().
+        http.
                 authorizeRequests()
-                .antMatchers("/").permitAll().antMatchers("/role/Add").permitAll()
-                .antMatchers("/basicauth").permitAll()
-                .antMatchers("/getuserbyusername/{username}").permitAll()
-                .antMatchers("/imgprofile/{id}").permitAll()
-                .antMatchers("/profile/{id}").permitAll()
-                .antMatchers("/file/{filename:.+}").permitAll()
-                .antMatchers("/upload").permitAll()
-                .antMatchers("/Files").permitAll()
-                .antMatchers("/Delete/{id}").permitAll()
-                .antMatchers("/update/{fileId}").permitAll()
-                .antMatchers("/getallfiledb").permitAll()
-                .antMatchers("/files/{id}").permitAll()
-                .antMatchers("/Getemplois").permitAll()
-                .antMatchers("/GetReglements").permitAll()
-                .antMatchers("/reglements/{id}").permitAll()
-                .antMatchers("/getuserwithclasse").permitAll()
-                .antMatchers("/getlienmeet").permitAll()
-                .antMatchers("/ajouterMeet").permitAll()
-                .antMatchers("/Getmeets").permitAll()
-                .antMatchers("/supprimmerMeet/{idmeet}").permitAll()
-                .antMatchers("/getmeetbyid/{id}").permitAll()
-                .antMatchers("/meet/{id}").permitAll()
-                .antMatchers("/role/list").permitAll()
-                .antMatchers("/Registration").permitAll()
-                .antMatchers("/files/{filename:.+}").permitAll()
-                .antMatchers("/getfilebyid/{id}").permitAll()
-                .antMatchers("/api/profile").permitAll()
-                .antMatchers("/api/getAll").permitAll()
-                .antMatchers("/api/profile/{id}").permitAll()
-                .antMatchers("/api/imgprofile/{id}").permitAll()
+                .antMatchers("/").permitAll() // accès pour tous users
                 .antMatchers("/login").permitAll() // accès pour tous users
                 .antMatchers("/registration").permitAll() // accès pour tous users
                 .antMatchers("/role/**").hasAnyAuthority("SUPERADMIN")
@@ -82,12 +51,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/article/edit/**").hasAnyAuthority("ADMIN","SUPERADMIN")
                 .antMatchers("/article/delete/**").hasAnyAuthority("ADMIN","SUPERADMIN")
                 .antMatchers("/article/show/**").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
-                .antMatchers("/article/list").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
-        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .antMatchers("/article/list").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT").anyRequest()
+                .authenticated().and().csrf().disable().formLogin() // l'accès de fait via un formulaire
+
+                .loginPage("/login").failureUrl("/login?error=true") // fixer la page login
+
+                .defaultSuccessUrl("/dashboard") // page d'accueil après login avec succès
+                .usernameParameter("email") // paramètres d'authentifications login et password
+                .passwordParameter("password")
+                .and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // route de deconnexion ici /logut
+                .logoutSuccessUrl("/login").and().exceptionHandling() // une fois deconnecté redirection vers login
+
+                .accessDeniedPage("/403");
     }
 
 
