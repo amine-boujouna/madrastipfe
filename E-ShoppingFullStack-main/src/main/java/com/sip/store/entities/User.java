@@ -61,6 +61,9 @@ public class User {
 	@Column(name = "nompere")
 
 	private String nompere;
+	@Column(name = "emailpere")
+
+	private String emailpere;
 	@Column(name = "nommere")
 
 	private String nommere;
@@ -238,6 +241,14 @@ public class User {
 
 	public void setClasseList(Set<Classe> classeList) {
 		this.classeList = classeList;
+	}
+
+	public String getEmailpere() {
+		return emailpere;
+	}
+
+	public void setEmailpere(String emailpere) {
+		this.emailpere = emailpere;
 	}
 
 	@Override

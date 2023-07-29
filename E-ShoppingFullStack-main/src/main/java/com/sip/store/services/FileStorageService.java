@@ -47,7 +47,6 @@ public class FileStorageService {
     public FileDB getFile(String id) {
         return fileDBRepository.findById(id).get();
     }
-    public FileDB getfile(String id){return fileDBRepository.findById(id).get();}
     public FileDB deletefile(String idfile)
     {
         FileDB temp = null;
@@ -106,17 +105,7 @@ public class FileStorageService {
             throw new RuntimeException(e.getMessage());
         }
     }
-    public void saveregelements(MultipartFile file) {
-        try {
-            Files.copy(file.getInputStream(), this.rootreglements.resolve(file.getOriginalFilename()));
-        } catch (Exception e) {
-            if (e instanceof FileAlreadyExistsException) {
-                throw new RuntimeException("A file of that name already exists.");
-            }
 
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 
     public Resource load(String filename) {
         try {
@@ -147,20 +136,7 @@ public class FileStorageService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-    public Resource loadreglmenet(String filename) {
-        try {
-            Path file = rootreglements.resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
 
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new RuntimeException("Could not read the file!");
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
-        }
-    }
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
     }

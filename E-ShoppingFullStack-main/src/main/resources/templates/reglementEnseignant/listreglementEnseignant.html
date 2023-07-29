@@ -85,7 +85,7 @@
                                     <h4 class="card-title" th:text="#{label.reglementslist}"></h4>
                                 </div>
                                 <div class="col-4 float-right">
-                                    <a th:href="@{../reglement/add}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right" th:text="#{label.ajoutenouveauregelment}"><i
+                                    <a th:href="@{../reglementEnseignant/add}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right" th:text="#{label.ajoutenouveauregelment}"><i
                                             class="fa fa-plus fa-sm text-white-50 pr-1 "></i></a>
                                 </div>
                             </div>
@@ -97,12 +97,33 @@
                                         <th th:text="#{label.id}"></th>
                                         <th th:text="#{label.nom}"></th>
                                         <th th:text="#{label.prenom}"></th>
-                                        <th th:text="#{label.montant}"></th>
-                                        <th th:text="#{label.modalite}"></th>
-                                        <th th:text="#{label.remarque}"></th>
-                                        <th th:text="#{label.duree}"></th>
-                                        <th th:text="#{label.date}"></th>
+                                        <th th:text="#{label.titre}"></th>
+                                        <th th:text="#{label.annee}"></th>
+                                        <th th:text="#{label.moisdepais}"></th>
+                                        <th th:text="#{label.datedepaimenet}"></th>
+                                        <th th:text="#{label.Matricule}"></th>
+                                        <th th:text="#{label.numcnss}"></th>
+                                        <th th:text="#{label.Categorie}"></th>
+                                        <th th:text="#{label.Echelon}"></th>
+                                        <th th:text="#{label.salairedebase}"></th>
+                                        <th th:text="#{label.Tauxhoraire}"></th>
+                                        <th th:text="#{label.prime}"></th>
+                                        <th th:text="#{label.heuresuplemaentaire}"></th>
+                                        <th th:text="#{label.congeeAnnuel}"></th>
+                                        <th th:text="#{label.retenueCNSS}"></th>
+                                        <th th:text="#{label.salairebrut}"></th>
+                                        <th th:text="#{label.deductions}"></th>
+                                        <th th:text="#{label.contributionsociale}"></th>
+                                        <th th:text="#{label.salairenet}"></th>
+                                        <th th:text="#{label.avance}"></th>
+                                        <th th:text="#{label.modedepaimenet}"></th>
+                                        <th th:text="#{label.netapayer}"></th>
+                                        <th th:text="#{label.numcompte}"></th>
+                                        <th th:text="#{label.intitulebanque}"></th>
+                                        <th th:text="#{label.soldeconge}"></th>
+                                        <th th:text="#{label.nombredheuredabsence}"></th>
                                         <th th:text="#{label.email}"></th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -110,11 +131,31 @@
                                         <td th:text="${reglement.id}"></td>
                                         <td th:text="${reglement.user.nom}"></td>
                                         <td th:text="${reglement.user.prenom}"></td>
-                                        <td th:text="${reglement.montant}"></td>
-                                        <td th:text="${reglement.modalite}"></td>
-                                        <td th:text="${reglement.remarque}"></td>
-                                        <td th:text="${reglement.duree}"></td>
-                                        <td th:text="${reglement.date}"></td>
+                                        <td th:text="${reglement.titre}"></td>
+                                        <td th:text="${reglement.annee}"></td>
+                                        <td th:text="${reglement.moisdepais}"></td>
+                                        <td th:text="${reglement.datedepaimenet}"></td>
+                                        <td th:text="${reglement.Matricule}"></td>
+                                        <td th:text="${reglement.numcnss}"></td>
+                                        <td th:text="${reglement.Categorie}"></td>
+                                        <td th:text="${reglement.Echelon}"></td>
+                                        <td th:text="${reglement.salairedebase}"></td>
+                                        <td th:text="${reglement.Tauxhoraire}"></td>
+                                        <td th:text="${reglement.prime}"></td>
+                                        <td th:text="${reglement.heuresuplemaentaire}"></td>
+                                        <td th:text="${reglement.congeeAnnuel}"></td>
+                                        <td th:text="${reglement.retenueCNSS}"></td>
+                                        <td th:text="${reglement.salairebrut}"></td>
+                                        <td th:text="${reglement.deductions}"></td>
+                                        <td th:text="${reglement.contributionsociale}"></td>
+                                        <td th:text="${reglement.salairenet}"></td>
+                                        <td th:text="${reglement.avance}"></td>
+                                        <td th:text="${reglement.modedepaimenet}"></td>
+                                        <td th:text="${reglement.netapayer}"></td>
+                                        <td th:text="${reglement.numcompte}"></td>
+                                        <td th:text="${reglement.intitulebanque}"></td>
+                                        <td th:text="${reglement.soldeconge}"></td>
+                                        <td th:text="${reglement.nombredheuredabsence}"></td>
                                         <td th:text="${reglement.user.email}"></td>
                                     </tr>
                                     </tbody>

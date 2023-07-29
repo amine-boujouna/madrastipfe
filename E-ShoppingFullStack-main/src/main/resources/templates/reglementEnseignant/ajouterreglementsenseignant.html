@@ -82,25 +82,97 @@
                         <div class="card-body">
                             <div class="form-validation">
                                 <h1>Nouveau Règlement</h1>
-                                <form th:action="@{/reglement/add}" th:object="${reglement}" method="post">
-                                    <label>Montant:</label>
-                                    <input type="text" th:field="*{montant}"><br>
+                                <form th:action="@{/reglementEnseignant/add}" th:object="${reglement}" method="post">
+                                    <label>titre:</label>
+                                    <input type="text" th:field="*{titre}"><br>
 
-                                    <label for="duree">Durée:</label>
-                                    <select id="duree" th:field="*{duree}">
-                                        <option value="3mois">3 mois</option>
-                                        <option value="6mois">6 mois</option>
-                                        <option value="1an">1 an</option>
-                                    </select><br>
+                                    <label>année:</label>
+                                    <input type="text" th:field="*{annee}"><br>
 
-                                    <label for="modalite">modalité:</label>
-                                    <select id="modalite" th:field="*{modalite}">
-                                        <option value="espece">espece</option>
-                                        <option value="cheque">cheque</option>
-                                        <option value="virement">virement</option>
-                                    </select><br>
-                                    <label>Remarque:</label>
-                                    <input type="text" th:field="*{remarque}"><br>
+                                    <label>moisdepais:</label>
+                                    <input type="text" th:field="*{moisdepais}"><br>
+
+                                    <label>datedepaimenet:</label>
+                                    <input type="text" th:field="*{datedepaimenet}"><br>
+
+                                    <label>Matricule:</label>
+                                    <input type="number" th:field="*{Matricule}"><br>
+
+                                    <label>cin:</label>
+                                    <input type="number" th:field="*{cin}"><br>
+
+                                    <label>numcnss:</label>
+                                    <input type="number" th:field="*{numcnss}"><br>
+
+                                    <label>Categorie:</label>
+                                    <input type="number" th:field="*{Categorie}"><br>
+
+                                    <label>Echelon:</label>
+                                    <input type="number" th:field="*{Echelon}"><br>
+
+                                    <label>salairedebase:</label>
+                                    <input type="number" th:field="*{salairedebase}"><br>
+
+                                    <label>Tauxhoraire:</label>
+                                    <input type="number" th:field="*{Tauxhoraire}"><br>
+
+                                    <label>prime:</label>
+                                    <input type="number" th:field="*{prime}"><br>
+
+                                    <label>heuresuplemaentaire:</label>
+                                    <input type="number" th:field="*{heuresuplemaentaire}"><br>
+
+                                    <label>congeeAnnuel:</label>
+                                    <input type="number" th:field="*{congeeAnnuel}"><br>
+
+                                    <label>retenueCNSS:</label>
+                                    <input type="number" th:field="*{retenueCNSS}"><br>
+
+                                    <label>salairebrut:</label>
+                                    <input type="number" th:field="*{salairebrut}"><br>
+
+                                    <label>retenueCNSS:</label>
+                                    <input type="number" th:field="*{retenueCNSS}"><br>
+
+                                    <label>deductions:</label>
+                                    <input type="number" th:field="*{deductions}"><br>
+
+                                    <label>contributionsociale:</label>
+                                    <input type="number" th:field="*{contributionsociale}"><br>
+
+                                    <label>salairenet:</label>
+                                    <input type="number" th:field="*{salairenet}"><br>
+
+                                    <label>avance:</label>
+                                    <input type="number" th:field="*{avance}"><br>
+
+                                    <label>netapayer:</label>
+                                    <input type="number" th:field="*{netapayer}"><br>
+
+                                    <label>modedepaimenet:</label>
+                                    <input type="text" th:field="*{modedepaimenet}"><br>
+
+
+                                    <label>numcompte:</label>
+                                    <input type="number" th:field="*{numcompte}"><br>
+
+
+                                    <label>intitulebanque:</label>
+                                    <input type="text" th:field="*{intitulebanque}"><br>
+
+
+                                    <label>congeprisparmois:</label>
+                                    <input type="number" th:field="*{congeprisparmois}"><br>
+
+
+                                    <label>soldeconge:</label>
+                                    <input type="number" th:field="*{soldeconge}"><br>
+
+
+                                    <label>nombredheuredabsence:</label>
+                                    <input type="number" th:field="*{nombredheuredabsence}"><br>
+
+
 
                                     <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.nomeleve}"></label>
                                     <div class="col-lg-6">
@@ -110,13 +182,7 @@
                                         </select>
                                     </div>
 
-                                    <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.emailpere}"></label>
-                                    <div class="col-lg-6">
-                                        <select name="userid" class="form-control" >
-                                            <option disabled selected value> -- select an option -- </option>
-                                            <option  th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.emailpere}" />
-                                        </select>
-                                    </div>
+
 
 
                                     <input type="submit" value="Enregistrer">

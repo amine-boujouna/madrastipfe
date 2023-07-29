@@ -29,7 +29,7 @@ public class EmailService implements EmailSender {
                     new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Alerte de pour votre compte madrasti ");
+            helper.setSubject("Alerte pour votre compte madrasti ");
             helper.setFrom("amine.boujouna@esprit.tn");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {

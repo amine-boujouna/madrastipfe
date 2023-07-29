@@ -73,14 +73,7 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
     }
-    @GetMapping("/reglements/{id}")
-    public ResponseEntity<byte[]> getfile(@PathVariable String id) {
-        FileDB fileDB = storageService.getfile(id);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-                .body(fileDB.getData());
-    }
     @DeleteMapping("/Delete/{id}")
     public FileDB deleteFile(@PathVariable String id) {
         return storageService.deletefile(id);

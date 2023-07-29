@@ -81,26 +81,25 @@
           <div class="card">
             <div class="card-body">
               <div class="form-validation">
-                <form
-                        id="uploadForm"
-                        method="post"
-                        th:action="@{/ajouteremplois}"
-                        enctype="multipart/form-data">
-                  <input id="input-file" type="file" name="file" />
-                  <button class="btn btn-sm btn-outline-success float-right" type="submit">
-                    Upload
-                  </button>
-                </form>
+                <form action="#" th:action="@{/emplois/add}" th:object="${emploi}" method="post" enctype="multipart/form-data">
+                  <label>Description: <input type="text" th:field="*{description}" /></label><br/>
+                  <label>PDF: <input type="file" name="pdfFile" /></label><br/>
+                  <label>Durée: <input type="text" th:field="*{duree}" /></label><br/>
 
-                <div
-                        th:if="${message != null}"
-                        class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
-                        role="alert">
-                  [[${message}]]
-                  <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
+                  <!-- Assuming you have a dropdown to select the class -->
+
+                  <div class="form-group row">
+                    <label for="classe" class="col-lg-4 col-form-label" th:text="#{label.class}"></label>
+                    <div class="col-lg-6">
+                      <select name="classeid" class="form-control" >
+                        <option disabled selected value> -- select an option -- </option>
+                        <option  th:each="pr: ${classes}" th:value="${pr.id}" th:text="${pr.nomc}" />
+                      </select>
+                    </div>
+                  </div>
+
+                  <input type="submit" value="Save" />
+                </form>
               </div>
 
               </div>

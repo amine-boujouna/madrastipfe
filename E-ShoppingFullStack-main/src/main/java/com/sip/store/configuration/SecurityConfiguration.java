@@ -35,6 +35,66 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource) // notre datasource
                 .passwordEncoder(bCryptPasswordEncoder); // en utilisant l'algorithme de cryptage bCrptPasswordEncoder
     }
+/*
+    @Override
+    protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
+
+
+        http.csrf().
+                disable().
+                authorizeRequests()
+                .antMatchers("/").permitAll().antMatchers("/role/Add").permitAll()
+                .antMatchers("/basicauth").permitAll()
+                .antMatchers("/getuserbyusername/{username}").permitAll()
+                .antMatchers("/imgprofile/{id}").permitAll()
+                .antMatchers("/profile/{id}").permitAll()
+                .antMatchers("/file/{filename:.+}").permitAll()
+                .antMatchers("/upload").permitAll()
+                .antMatchers("/Files").permitAll()
+                .antMatchers("/Delete/{id}").permitAll()
+                .antMatchers("/update/{fileId}").permitAll()
+                .antMatchers("/getallfiledb").permitAll()
+                .antMatchers("/files/{id}").permitAll()
+                .antMatchers("/Getemplois").permitAll()
+                .antMatchers("/GetReglements").permitAll()
+                .antMatchers("/reglements/{id}").permitAll()
+                .antMatchers("/getuserwithclasse").permitAll()
+                .antMatchers("/getlienmeet").permitAll()
+                .antMatchers("/ajouterMeet").permitAll()
+                .antMatchers("/Getmeets").permitAll()
+                .antMatchers("/supprimmerMeet/{idmeet}").permitAll()
+                .antMatchers("/getmeetbyid/{id}").permitAll()
+                .antMatchers("/meet/{id}").permitAll()
+                .antMatchers("/role/list").permitAll()
+                .antMatchers("/Registration").permitAll()
+                .antMatchers("/files/{filename:.+}").permitAll()
+                .antMatchers("/getfilebyid/{id}").permitAll()
+                .antMatchers("/api/profile").permitAll()
+                .antMatchers("/api/getAll").permitAll()
+                .antMatchers("/api/profile/{id}").permitAll()
+                .antMatchers("/api/imgprofile/{id}").permitAll()
+                .antMatchers("/login").permitAll() // accès pour tous users
+                .antMatchers("/registration").permitAll() // accès pour tous users
+                .antMatchers("/role/**").hasAnyAuthority("SUPERADMIN")
+                .antMatchers("/accounts/**").hasAnyAuthority("SUPERADMIN")
+                .antMatchers("/providers/**").hasAnyAuthority("ADMIN","SUPERADMIN")  // Authority = role
+                .antMatchers("/article/add").hasAnyAuthority("ADMIN","SUPERADMIN")
+                .antMatchers("/article/edit/**").hasAnyAuthority("ADMIN","SUPERADMIN")
+                .antMatchers("/article/delete/**").hasAnyAuthority("ADMIN","SUPERADMIN")
+                .antMatchers("/article/show/**").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
+                .antMatchers("/article/list").hasAnyAuthority("ADMIN","SUPERADMIN","AGENT")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+ */
+
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
@@ -65,6 +125,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .accessDeniedPage("/403");
     }
+
+
+
+
+
+
 
 
     // laisser l'accès aux ressources
