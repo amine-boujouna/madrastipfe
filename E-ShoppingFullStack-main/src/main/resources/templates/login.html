@@ -10,7 +10,91 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}">
      <link th:href="@{/css/style.css}" rel="stylesheet">
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333333; /* Couleur du texte plus foncée */
+        }
+
+        .login-form-bg {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-form {
+            max-width: 500px; /* Augmenter la largeur du formulaire */
+            width: 90%; /* Utiliser un pourcentage pour s'assurer que cela reste responsive */
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form__logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 120px; /* Ajuster la taille de votre logo ici */
+        }
+
+        .login-form__title {
+            text-align: center;
+            font-size: 28px; /* Augmenter la taille du titre */
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: #FF1C19;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .login-form__btn {
+            background-color: #0056b3; /* Couleur bleu foncé pour le bouton */
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-form__btn:hover {
+            background-color: #003c80;
+        }
+
+        .login-form__footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-form__footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body class="h-100">
@@ -29,7 +113,7 @@
         Preloader end
     ********************-->
 
-	 <div class="login-form-bg h-100">
+	<!-- <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
@@ -58,10 +142,35 @@
                 </div>
             </div>
         </div>
+    </div>-->
+    <div class="login-form-bg">
+        <div class="login-form">
+            <img class="login-form__logo" src="/images/logomadrasti.jpg" alt="Votre Logo">
+            <div class="login-form__title">Madrasti</div>
+
+            <form th:action="@{/login}" method="POST">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <div class="error-message" th:if="${param.error}">
+                    Email ou mot de passe invalide, veuillez vérifier.
+                </div>
+                <button class="login-form__btn" type="submit">Se connecter</button>
+            </form>
+
+            <!--<div class="login-form__footer">
+                Vous n'avez pas de compte? <a href="@{/registration}">Inscrivez-vous maintenant</a>
+            </div>-->
+        </div>
     </div>
-  <!--**********************************
-        Scripts
-    ***********************************-->
+    <!--**********************************
+          Scripts
+      ***********************************-->
     <script th:src="@{/plugins/common/common.min.js}"></script>
      <script th:src="@{/js/custom.min.js}"></script>
     <script th:src="@{/js/settings.js}"></script>

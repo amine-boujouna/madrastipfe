@@ -2,6 +2,7 @@ package com.sip.store.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,9 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -35,8 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource) // notre datasource
                 .passwordEncoder(bCryptPasswordEncoder); // en utilisant l'algorithme de cryptage bCrptPasswordEncoder
     }
-/*
-    @Override
+
+   @Override
     protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
 
 
@@ -45,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll().antMatchers("/role/Add").permitAll()
                 .antMatchers("/basicauth").permitAll()
+                .antMatchers("/getuserbyemail/{email}").permitAll()
                 .antMatchers("/getuserbyusername/{username}").permitAll()
                 .antMatchers("/imgprofile/{id}").permitAll()
                 .antMatchers("/profile/{id}").permitAll()
@@ -90,20 +97,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
- */
+
+
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Remplacez par l'URL de votre application Angular
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 
 
 
 
-    @Override
+
+
+
+
+
+  /* @Override
     protected void configure(HttpSecurity http) throws Exception { // méthode responsable de l'autorisation
 
         http.
                 authorizeRequests()
                 .antMatchers("/").permitAll() // accès pour tous users
                 .antMatchers("/login").permitAll() // accès pour tous users
-                .antMatchers("/registration").permitAll() // accès pour tous users
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/reglement/departements-montant").permitAll()
+                .antMatchers("/reglement/departements-montant-json").permitAll()// accès pour tous users
                 .antMatchers("/role/**").hasAnyAuthority("SUPERADMIN")
                 .antMatchers("/accounts/**").hasAnyAuthority("SUPERADMIN")
                 .antMatchers("/providers/**").hasAnyAuthority("ADMIN","SUPERADMIN")  // Authority = role
@@ -126,7 +152,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/403");
     }
 
-
+   */
 
 
 

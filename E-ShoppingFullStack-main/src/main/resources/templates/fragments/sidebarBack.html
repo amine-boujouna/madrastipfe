@@ -2,6 +2,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+    <link rel="stylesheet" href="https://fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 </head>
 <body>
 <div th:fragment="sidebar">
@@ -57,52 +61,89 @@
                      </a>
 
                  </li>-->
+              <!--    <li>
+                   <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                       <i class="fa fa-users" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestionutilisateur}"></span>
+                   </a>
+                   <ul aria-expanded="false">
+                       <li><a th:href="@{/users/list}"  th:text="#{label.GestiondesEleves}"></a></li>
+                       <li><a th:href="@{/users/listProfesseur}"  th:text="#{label.Gestiondesenseigant}"></a></li>
+                       <li><a th:href="@{/users/listAdministrateur}"  th:text="#{label.Gestiondesadminitratifs}"></a></li>
+
+                   </ul>
+               </li>-->
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/users/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.ajouteretudiant}"></span>
+                       <i class="fa fa-users" aria-hidden="true"></i><span class="nav-text" th:text="#{label.GestiondesEleves}"></span>
                     </a>
 
                 </li>
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/users/listProfesseur}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.addprofesseur}"></span>
+                       <i class="fa fa-users" aria-hidden="true"></i><span class="nav-text" th:text="#{label.Gestiondesenseigant}"></span>
                     </a>
 
                 </li>
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/users/listAdministrateur}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.addadministrateur}"></span>
+                        <i class="fa fa-users" aria-hidden="true"></i><span class="nav-text" th:text="#{label.Gestiondesadminitratifs}"></span>
                     </a>
 
                 </li>
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/departements/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.departement}"></span>
+                        <i class="fa fa-building" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondepartement}"></span>
                     </a>
 
                 </li>
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/niveau/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.niveau}"></span>
+                        <i class="fa fa-sitemap" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesniveuax}"></span>
                     </a>
 
                 </li>
 
                 <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/classe/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.classe}"></span>
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesclasses}"></span>
                     </a>
 
                 </li>
-                <li class="mega-menu mega-menu-sm">
+              <!--  <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/emplois/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.emplois}"></span>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesemploisdutemps}"></span>
+                    </a>
+
+                </li>-->
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesemploisdutemps}"></span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a th:href="@{/emplois/list}"  th:text="#{label.emploisdeseleves}"></a></li>
+                        <li><a th:href="@{/emploii/listemploienseignant}"  th:text="#{label.emploisdesenseignant}"></a></li>
+
+                    </ul>
+                </li>
+                  <li>
+                   <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                       <i class="fa fa-money" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesregelements}"></span>
+                   </a>
+                   <ul aria-expanded="false">
+                       <li><a th:href="@{/reglement/list}"  th:text="#{label.regelementsdeseleve}"></a></li>
+                       <li><a th:href="@{/reglementEnseignant/list}"  th:text="#{label.reglementsdesenseigant}"></a></li>
+
+                   </ul>
+               </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a th:href="@{/reglement/departements-montant}" aria-expanded="false">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="nav-text" th:text="#{label.statistique}"></span>
                     </a>
 
                 </li>
-                <li class="mega-menu mega-menu-sm">
+               <!-- <li class="mega-menu mega-menu-sm">
                     <a th:href="@{/reglement/list}" aria-expanded="false">
-                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.ajouterreglement}"></span>
+                        <i class="fa fa-money" aria-hidden="true"></i><span class="nav-text" th:text="#{label.gestiondesregelements}"></span>
                     </a>
 
                 </li>
@@ -111,7 +152,7 @@
                         <i class="icon-globe-alt menu-icon"></i><span class="nav-text" th:text="#{label.ajoutereglementenseignant}"></span>
                     </a>
 
-                </li>
+                </li>-->
 
                 <!--<li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">

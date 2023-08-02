@@ -42,4 +42,18 @@ public class UserService {
     }
 
 
+    public User getUserByUsername(String username) {
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be null or empty.");
+        }
+
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new RuntimeException("User not found for the given username.");
+        }
+
+        return user;
+    }
+
 }

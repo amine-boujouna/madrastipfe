@@ -11,7 +11,28 @@
     <!-- Custom Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
+    <style>
+        /* CSS personnalisé pour le formulaire */
+        .form-group.row {
+            margin-bottom: 15px;
+        }
+        /* Apply CSS to style the file input container */
+        .file-input-label {
+            display: inline-block;
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
+        /* Optional: Add some spacing between the icon and the label text */
+        .file-input-icon {
+            margin-right: 8px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -82,7 +103,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-validation">
-                                <form class="form-valide" th:action="@{/users/add}" th:object="${user}" method="post" enctype="multipart/form-data">
+                               <!-- <form class="form-valide" th:action="@{/users/add}" th:object="${user}" method="post" enctype="multipart/form-data">
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="val-name" th:text="#{label.email}"> <span class="text-danger">*</span>
                                         </label>
@@ -207,7 +228,7 @@
                                         <label for="classe" class="col-lg-4 col-form-label" th:text="#{label.class}"></label>
                                         <div class="col-lg-6">
                                             <select name="classeId" class="form-control" >
-                                                <option disabled selected value> -- select an option -- </option>
+                                                <option disabled selected value> &#45;&#45; select an option &#45;&#45; </option>
                                                 <option  th:each="pr: ${classes}" th:value="${pr.id}" th:text="${pr.nomc}" />
                                             </select>
                                         </div>
@@ -218,8 +239,129 @@
                                             <input type="submit" class="btn btn-primary" value="ajouter Eleve">
                                         </div>
                                     </div>
+                                </form>-->
+                                <!-- Ajoutez ces liens dans la section head de votre HTML -->
+
+
+
+                                <form class="form-valide" th:action="@{/users/add}" th:object="${user}" method="post" enctype="multipart/form-data">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-name" th:text="#{label.email}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{email}" class="form-control" id="val-name" name="val-username">
+                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-email" th:text="#{label.password}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{password}" class="form-control" id="val-email" name="val-email">
+                                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-address" th:text="#{label.userName}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{username}" class="form-control" id="val-address" name="val-address">
+                                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-address" th:text="#{label.adresse}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{adresse}" class="form-control" id="val-address" name="val-address">
+                                            <span th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.nom}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{nom}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.prenom}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{prenom}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.genre}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{genre}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.tel}"> <span class="text-danger">*</span></label>
+                                            <input type="number" th:field="*{tel}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.specialite}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{specialite}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('specialite')}" th:errors="*{specialite}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.biographie}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{biographie}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('biographie')}" th:errors="*{biographie}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.salaire}"> <span class="text-danger">*</span></label>
+                                            <input type="number" th:field="*{salaire}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('salaire')}" th:errors="*{salaire}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.age}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{age}" class="form-control" id="val-phone" name="val-phone">
+                                            <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label for="classe" class="col-lg-4 col-form-label" th:text="#{label.class}"></label>
+                                            <select name="classeId" class="form-control">
+                                                <option disabled selected value> -- select an option -- </option>
+                                                <option th:each="pr: ${classes}" th:value="${pr.id}" th:text="${pr.nomc}" />
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.photo}"> <span class="text-danger">*</span></label>
+                                            <input id="input-file" type="file" name="files" multiple/>
+                                            <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.nompere}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{nompere}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.nompere}">
+                                            <span th:if="${#fields.hasErrors('nompere')}" th:errors="*{nompere}" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.nommere}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{nommere}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.nommere}">
+                                            <span th:if="${#fields.hasErrors('nommere')}" th:errors="*{nommere}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="val-phone" th:text="#{label.emailpere}"> <span class="text-danger">*</span></label>
+                                            <input type="text" th:field="*{emailpere}" class="form-control" id="val-phone" name="val-phone" th:attr="placeholder=#{label.emailpere}">
+                                            <span th:if="${#fields.hasErrors('emailpere')}" th:errors="*{emailpere}" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <input type="submit" class="btn btn-primary" value="ajouter Eleve">
+                                        </div>
+                                    </div>
                                 </form>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,20 @@
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}">
     <!-- Custom Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <style>
+        /* CSS personnalisé pour le bouton "Enregistrer" */
+        .btn-enregistrer {
+            background-color: #007BFF; /* Couleur de fond normale */
+            border-color: #007BFF; /* Couleur de bordure normale */
+            color: #fff; /* Couleur du texte */
+        }
 
+        .btn-enregistrer:hover {
+            background-color: #0056b3; /* Couleur de fond au survol */
+            border-color: #0056b3; /* Couleur de bordure au survol */
+            color: #fff; /* Couleur du texte au survol */
+        }
+    </style>
 
 </head>
 
@@ -82,7 +95,7 @@
                         <div class="card-body">
                             <div class="form-validation">
                                 <h1>Nouveau Règlement</h1>
-                                <form th:action="@{/reglement/add}" th:object="${reglement}" method="post">
+                               <!-- <form th:action="@{/reglement/add}" th:object="${reglement}" method="post">
                                     <label>Montant:</label>
                                     <input type="text" th:field="*{montant}"><br>
 
@@ -105,7 +118,7 @@
                                     <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.nomeleve}"></label>
                                     <div class="col-lg-6">
                                         <select name="userid" class="form-control" >
-                                            <option disabled selected value> -- select an option -- </option>
+                                            <option disabled selected value> &#45;&#45; select an option &#45;&#45; </option>
                                             <option  th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.email}" />
                                         </select>
                                     </div>
@@ -113,14 +126,68 @@
                                     <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.emailpere}"></label>
                                     <div class="col-lg-6">
                                         <select name="userid" class="form-control" >
-                                            <option disabled selected value> -- select an option -- </option>
+                                            <option disabled selected value> &#45;&#45; select an option &#45;&#45; </option>
                                             <option  th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.emailpere}" />
                                         </select>
                                     </div>
 
 
                                     <input type="submit" value="Enregistrer">
+                                </form>-->
+                                <form th:action="@{/reglement/add}" th:object="${reglement}" method="post">
+                                    <div class="form-group">
+                                        <label for="montant">Montant:</label>
+                                        <input type="text" class="form-control" th:field="*{montant}" id="montant">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="duree">Durée:</label>
+                                        <select class="form-control" id="duree" th:field="*{duree}">
+                                            <option value="3mois">3 mois</option>
+                                            <option value="6mois">6 mois</option>
+                                            <option value="1an">1 an</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="modalite">Modalité:</label>
+                                        <select class="form-control" id="modalite" th:field="*{modalite}">
+                                            <option value="espece">espèce</option>
+                                            <option value="cheque">chèque</option>
+                                            <option value="virement">virement</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="remarque">Remarque:</label>
+                                        <input type="text" class="form-control" th:field="*{remarque}" id="remarque">
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="eleve" class="col-lg-4 col-form-label">Email de l'élève:</label>
+                                        <div class="col-lg-6">
+                                            <select name="userid" class="form-control" id="eleve">
+                                                <option disabled selected value> -- Sélectionnez une option -- </option>
+                                                <option th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.email}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="emailpere" class="col-lg-4 col-form-label">Email du père:</label>
+                                        <div class="col-lg-6">
+                                            <select name="userid" class="form-control" id="emailpere">
+                                                <option disabled selected value> -- Sélectionnez une option -- </option>
+                                                <option th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.emailpere}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" value="Enregistrer"  class="btn btn-enregistrer">
+                                    </div>
                                 </form>
+
 
 
                             </div>

@@ -1,6 +1,8 @@
 package com.sip.store.controllers;
 
-import com.sip.store.entities.*;
+import com.sip.store.entities.Classe;
+import com.sip.store.entities.Emploi;
+import com.sip.store.entities.User;
 import com.sip.store.repositories.ClasseRepository;
 import com.sip.store.repositories.EmploiRepository;
 import com.sip.store.repositories.UserRepository;
@@ -14,34 +16,33 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 @Controller
-@RequestMapping("/emplois/")
-
-public class EmploisController {
-           @Autowired
-           private ClasseRepository classeRepository;
-           @Autowired
-           private EmploiRepository emploiRepository;
-           @Autowired
-           private UserRepository userRepository;
+@RequestMapping("/emploii/")
+public class EmploiEnseignantController {
+    @Autowired
+    private ClasseRepository classeRepository;
+    @Autowired
+    private EmploiRepository emploiRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private static final String UPLOAD_DIR = "C:/work/madrastipfe/E-ShoppingFullStack-main/src/uploads/"; // Directory to store uploaded files
-    @GetMapping("list")
-    public String listemploi(Model model) {
-        model.addAttribute("emploi", emploiRepository.findAll());
-        return "emplois/listemplois";
-    }
 
-    @GetMapping("/add")
-    public String showAddEmploiForm(Model model) {
+    @GetMapping("listemploienseignant")
+    public String listemploienseignant(Model model) {
+        model.addAttribute("emploii", emploiRepository.findAll());
+        return "emploisenseignant/listemploienseignant";
+    }
+    @GetMapping("addemploienseignant")
+    public String showAddEmploiFormenseignant(Model model) {
         model.addAttribute("emploi", new Emploi());
         model.addAttribute("classes", classeRepository.findAll());
-        return "emplois/addemplois";
+        model.addAttribute("users", userRepository.findAll());
+        return "emploisenseignant/addemploisenseignant";
     }
-    @PostMapping("/add")
-    public String saveEmploi(@ModelAttribute Emploi emploi, @RequestParam("pdfFile") MultipartFile pdfFile
-            ,@RequestParam(name = "classeid", required = false) Long d) {
+    @PostMapping("addemploienseignant")
+    public String saveEmploienseignant(@ModelAttribute Emploi emploi, @RequestParam("pdfFile") MultipartFile pdfFile
+            ,@RequestParam(name = "classeid", required = false) Long d,@RequestParam(name = "userid", required = false) Long u) {
         if (!pdfFile.isEmpty()) {
             try {
                 // Get the bytes of the PDF file
@@ -62,10 +63,10 @@ public class EmploisController {
         Classe classe= classeRepository.findById(d)
                 .orElseThrow(()-> new IllegalArgumentException("Invalid classe Id:" + d));
         emploi.setClasse(classe);
+        User user= userRepository.findById(u)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid user Id:" + d));
+        emploi.setUser(user);
         emploiRepository.save(emploi);
-        return "redirect:list"; // Redirect to the add-emploi page after saving
+        return "redirect:listemploienseignant"; // Redirect to the add-emploi page after saving
     }
-
-
-
 }

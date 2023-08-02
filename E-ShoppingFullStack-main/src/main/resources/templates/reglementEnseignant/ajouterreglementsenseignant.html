@@ -11,7 +11,13 @@
     <!-- Custom Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
-
+        /* CSS personnalisé pour le formulaire */
+    <style>
+        /* CSS personnalisé pour le formulaire */
+        .form-group.row {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -82,114 +88,309 @@
                         <div class="card-body">
                             <div class="form-validation">
                                 <h1>Nouveau Règlement</h1>
-                                <form th:action="@{/reglementEnseignant/add}" th:object="${reglement}" method="post">
-                                    <label>titre:</label>
-                                    <input type="text" th:field="*{titre}"><br>
+                                <div class="form-container">
+                                   <!-- <form th:action="@{/reglementEnseignant/add}" th:object="${reglement}" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Titre:</label>
+                                                <input type="text" class="form-control" th:field="*{titre}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Année:</label>
+                                                <input type="text" class="form-control" th:field="*{annee}">
+                                            </div>
+                                        </div>
 
-                                    <label>année:</label>
-                                    <input type="text" th:field="*{annee}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Mois de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{moisdepais}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Date de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{datedepaimenet}">
+                                            </div>
+                                        </div>
 
-                                    <label>moisdepais:</label>
-                                    <input type="text" th:field="*{moisdepais}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Matricule:</label>
+                                                <input type="number" class="form-control" th:field="*{Matricule}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>CIN:</label>
+                                                <input type="number" class="form-control" th:field="*{cin}">
+                                            </div>
+                                        </div>
 
-                                    <label>datedepaimenet:</label>
-                                    <input type="text" th:field="*{datedepaimenet}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Numéro CNSS:</label>
+                                                <input type="number" class="form-control" th:field="*{numcnss}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Catégorie:</label>
+                                                <input type="number" class="form-control" th:field="*{Categorie}">
+                                            </div>
+                                        </div>
 
-                                    <label>Matricule:</label>
-                                    <input type="number" th:field="*{Matricule}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Échelon:</label>
+                                                <input type="number" class="form-control" th:field="*{Echelon}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Salaire de base:</label>
+                                                <input type="number" class="form-control" th:field="*{salairedebase}">
+                                            </div>
+                                        </div>
 
-                                    <label>cin:</label>
-                                    <input type="number" th:field="*{cin}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Taux horaire:</label>
+                                                <input type="number" class="form-control" th:field="*{Tauxhoraire}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Prime:</label>
+                                                <input type="number" class="form-control" th:field="*{prime}">
+                                            </div>
+                                        </div>
 
-                                    <label>numcnss:</label>
-                                    <input type="number" th:field="*{numcnss}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Heures supplémentaires:</label>
+                                                <input type="number" class="form-control" th:field="*{heuresuplemaentaire}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Congé annuel:</label>
+                                                <input type="number" class="form-control" th:field="*{congeeAnnuel}">
+                                            </div>
+                                        </div>
 
-                                    <label>Categorie:</label>
-                                    <input type="number" th:field="*{Categorie}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Retenue CNSS:</label>
+                                                <input type="number" class="form-control" th:field="*{retenueCNSS}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Salaire brut:</label>
+                                                <input type="number" class="form-control" th:field="*{salairebrut}">
+                                            </div>
+                                        </div>
 
-                                    <label>Echelon:</label>
-                                    <input type="number" th:field="*{Echelon}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Déductions:</label>
+                                                <input type="number" class="form-control" th:field="*{deductions}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Contribution sociale:</label>
+                                                <input type="number" class="form-control" th:field="*{contributionsociale}">
+                                            </div>
+                                        </div>
 
-                                    <label>salairedebase:</label>
-                                    <input type="number" th:field="*{salairedebase}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Salaire net:</label>
+                                                <input type="number" class="form-control" th:field="*{salairenet}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Avance:</label>
+                                                <input type="number" class="form-control" th:field="*{avance}">
+                                            </div>
+                                        </div>
 
-                                    <label>Tauxhoraire:</label>
-                                    <input type="number" th:field="*{Tauxhoraire}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Net à payer:</label>
+                                                <input type="number" class="form-control" th:field="*{netapayer}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Mode de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{modedepaimenet}">
+                                            </div>
+                                        </div>
 
-                                    <label>prime:</label>
-                                    <input type="number" th:field="*{prime}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Numéro de compte:</label>
+                                                <input type="number" class="form-control" th:field="*{numcompte}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Intitulé banque:</label>
+                                                <input type="text" class="form-control" th:field="*{intitulebanque}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>Congé pris par mois:</label>
+                                                <input type="number" class="form-control" th:field="*{congeprisparmois}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Solde conge:</label>
+                                                <input type="number" class="form-control" th:field="*{soldeconge}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label>nombre d'heure d'absence:</label>
+                                                <input type="number" class="form-control" th:field="*{nombredheuredabsence}">
+                                            </div>
 
-                                    <label>heuresuplemaentaire:</label>
-                                    <input type="number" th:field="*{heuresuplemaentaire}"><br>
+                                        </div>
+                                        <input type="submit" value="Enregistrer" class="btn btn-primary">
+                                    </form>
+-->
+                                    <!-- Ajoutez ces liens dans la section head de votre HTML -->
 
-                                    <label>congeeAnnuel:</label>
-                                    <input type="number" th:field="*{congeeAnnuel}"><br>
+                                    <form th:action="@{/reglementEnseignant/add}" th:object="${reglement}" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Titre:</label>
+                                                <input type="text" class="form-control" th:field="*{titre}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Année:</label>
+                                                <input type="text" class="form-control" th:field="*{annee}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Mois de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{moisdepais}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Date de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{datedepaimenet}">
+                                            </div>
+                                        </div>
 
-                                    <label>retenueCNSS:</label>
-                                    <input type="number" th:field="*{retenueCNSS}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Catégorie:</label>
+                                                <input type="number" class="form-control" th:field="*{Categorie}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>CIN:</label>
+                                                <input type="number" class="form-control" th:field="*{cin}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Numéro CNSS:</label>
+                                                <input type="number" class="form-control" th:field="*{numcnss}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Échelon:</label>
+                                                <input type="number" class="form-control" th:field="*{Echelon}">
+                                            </div>
+                                        </div>
 
-                                    <label>salairebrut:</label>
-                                    <input type="number" th:field="*{salairebrut}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Matricule:</label>
+                                                <input type="number" class="form-control" th:field="*{Matricule}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Salaire de base:</label>
+                                                <input type="number" class="form-control" th:field="*{salairedebase}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Taux horaire:</label>
+                                                <input type="number" class="form-control" th:field="*{Tauxhoraire}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Prime:</label>
+                                                <input type="number" class="form-control" th:field="*{prime}">
+                                            </div>
+                                        </div>
 
-                                    <label>retenueCNSS:</label>
-                                    <input type="number" th:field="*{retenueCNSS}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Heures supplémentaires:</label>
+                                                <input type="number" class="form-control" th:field="*{heuresuplemaentaire}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Congé annuel:</label>
+                                                <input type="number" class="form-control" th:field="*{congeeAnnuel}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Retenue CNSS:</label>
+                                                <input type="number" class="form-control" th:field="*{retenueCNSS}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Salaire brut:</label>
+                                                <input type="number" class="form-control" th:field="*{salairebrut}">
+                                            </div>
+                                        </div>
 
-                                    <label>deductions:</label>
-                                    <input type="number" th:field="*{deductions}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Déductions:</label>
+                                                <input type="number" class="form-control" th:field="*{deductions}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Contribution sociale:</label>
+                                                <input type="number" class="form-control" th:field="*{contributionsociale}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Salaire net:</label>
+                                                <input type="number" class="form-control" th:field="*{salairenet}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Avance:</label>
+                                                <input type="number" class="form-control" th:field="*{avance}">
+                                            </div>
+                                        </div>
 
-                                    <label>contributionsociale:</label>
-                                    <input type="number" th:field="*{contributionsociale}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Net à payer:</label>
+                                                <input type="number" class="form-control" th:field="*{netapayer}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Mode de paiement:</label>
+                                                <input type="text" class="form-control" th:field="*{modedepaimenet}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Numéro de compte:</label>
+                                                <input type="number" class="form-control" th:field="*{numcompte}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Intitulé banque:</label>
+                                                <input type="text" class="form-control" th:field="*{intitulebanque}">
+                                            </div>
+                                        </div>
 
-                                    <label>salairenet:</label>
-                                    <input type="number" th:field="*{salairenet}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label>Congé pris par mois:</label>
+                                                <input type="number" class="form-control" th:field="*{congeprisparmois}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Solde conge:</label>
+                                                <input type="number" class="form-control" th:field="*{soldeconge}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>nombre d'heure d'absence:</label>
+                                                <input type="number" class="form-control" th:field="*{nombredheuredabsence}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Nombre d'heure supplémentaires:</label>
+                                                <input type="number" class="form-control" th:field="*{heuresuplemaentaire}">
+                                            </div>
+                                        </div>
 
-                                    <label>avance:</label>
-                                    <input type="number" th:field="*{avance}"><br>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.emailenseignant}"></label>
+                                                <div class="col-lg-6">
+                                                    <select name="userid" class="form-control" >
+                                                        <option disabled selected value> -- select an option -- </option>
+                                                        <option  th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.email}" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <label>netapayer:</label>
-                                    <input type="number" th:field="*{netapayer}"><br>
-
-                                    <label>modedepaimenet:</label>
-                                    <input type="text" th:field="*{modedepaimenet}"><br>
-
-
-                                    <label>numcompte:</label>
-                                    <input type="number" th:field="*{numcompte}"><br>
-
-
-                                    <label>intitulebanque:</label>
-                                    <input type="text" th:field="*{intitulebanque}"><br>
-
-
-                                    <label>congeprisparmois:</label>
-                                    <input type="number" th:field="*{congeprisparmois}"><br>
-
-
-                                    <label>soldeconge:</label>
-                                    <input type="number" th:field="*{soldeconge}"><br>
-
-
-                                    <label>nombredheuredabsence:</label>
-                                    <input type="number" th:field="*{nombredheuredabsence}"><br>
-
-
-
-                                    <label for="reglement" class="col-lg-4 col-form-label" th:text="#{label.nomeleve}"></label>
-                                    <div class="col-lg-6">
-                                        <select name="userid" class="form-control" >
-                                            <option disabled selected value> -- select an option -- </option>
-                                            <option  th:each="pr: ${users}" th:value="${pr.id}" th:text="${pr.email}" />
-                                        </select>
-                                    </div>
-
-
-
-
-                                    <input type="submit" value="Enregistrer">
-                                </form>
-
-
-                            </div>
+                                        <input type="submit" value="Enregistrer" class="btn btn-primary">
+                                    </form>
 
                         </div>
                     </div>

@@ -92,7 +92,7 @@
 
               <div class="container-fluid" style="max-width: 600px; margin: 0 auto;">
 
-
+<!--
                 <table class="table table-striped table-bordered zero-configuration">
                   <thead>
                   <tr align="center">
@@ -114,7 +114,27 @@
 
                   </tr>
                   </tbody>
-                </table>
+                </table>-->
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th th:text="#{label.pdf}"></th>
+                      <th th:text="#{label.duree}"></th>
+                      <th th:text="#{label.class}"></th>
+                      <th th:text="#{label.description}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="emploi : ${emploi}">
+                      <td><a th:href="@{/download/pdf/{id}(id=${emploi.id})}" th:text="${emploi.pdf}"></a></td>
+                      <td><span th:text="${emploi.duree}"></span></td>
+                      <td><span th:text="${emploi.classe.nomc}"></span></td>
+                      <td><span th:text="${emploi.description}"></span></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
             </div>
           </div>
         </div>

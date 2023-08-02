@@ -1,8 +1,8 @@
 package com.sip.store.controllers;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sip.store.entities.Reglement;
 import com.sip.store.entities.ReglementEnseignant;
@@ -64,7 +64,7 @@ public class ReglementEnseignantController {
         return "redirect:list";
     }
 
-    public static byte[] generatePdf(ReglementEnseignant reglementEnseignant) {
+   /* public static byte[] generatePdf(ReglementEnseignant reglementEnseignant) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             Document document = new Document();
@@ -103,6 +103,8 @@ public class ReglementEnseignantController {
             document.add(new Paragraph("Matricule: " + reglementEnseignant.getMatricule()));
             document.add(new Paragraph("retenueCNSS: " + reglementEnseignant.getRetenueCNSS()));
             document.add(new Paragraph("congeprisparmois: " + reglementEnseignant.getCongeprisparmois()));
+
+
             document.close();
 
             return outputStream.toByteArray();
@@ -112,6 +114,8 @@ public class ReglementEnseignantController {
             return null;
         }
     }
+
+    */
 
     private void sendEmailWithAttachment(String userEmail, byte[] attachment) {
         try {
@@ -131,5 +135,141 @@ public class ReglementEnseignantController {
             e.printStackTrace();
         }
     }
+   /* public static byte[] generatePdf(ReglementEnseignant reglementEnseignant) {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Document document = new Document();
+            PdfWriter.getInstance(document, outputStream);
 
+            document.open();
+
+            // Ajouter les informations du règlement dans le PDF
+            PdfPTable table = new PdfPTable(4);
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(20);
+            table.setSpacingAfter(20);
+
+            // Première ligne du tableau
+            addCell(table, "Matricule: " + reglementEnseignant.getMatricule());
+            addCell(table, "CIN: " + reglementEnseignant.getCin());
+            addCell(table, "Num CNSS: " + reglementEnseignant.getNumcnss());
+            addCell(table, "Num Compte: " + reglementEnseignant.getNumcompte());
+
+            // Deuxième ligne du tableau
+            addCell(table, "Catégorie: " + reglementEnseignant.getCategorie());
+            addCell(table, "Echelon: " + reglementEnseignant.getEchelon());
+            addCell(table, "Salaire de base: " + reglementEnseignant.getSalairedebase());
+            addCell(table, "Taux Horaire: " + reglementEnseignant.getTauxhoraire());
+
+            // Troisième ligne du tableau
+            addCell(table, "Année: " + reglementEnseignant.getAnnee());
+            addCell(table, "Mois de paiement: " + reglementEnseignant.getMoisdepais());
+            addCell(table, "Date de paiement: " + reglementEnseignant.getDatedepaimenet());
+            addCell(table, " ");
+
+            // Quatrième ligne du tableau
+            addCell(table, "Nom: " + reglementEnseignant.getUser().getNom());
+            addCell(table, "Prénom: " + reglementEnseignant.getUser().getPrenom());
+            addCell(table, " ");
+            addCell(table, " ");
+
+            // Cinquième ligne du tableau
+            addCell(table, "Salaire de base: " + reglementEnseignant.getSalairedebase());
+            addCell(table, "Prime: " + reglementEnseignant.getPrime());
+            addCell(table, "Heures Supplémentaires: " + reglementEnseignant.getHeuresuplemaentaire());
+            addCell(table, "Congé Annuel: " + reglementEnseignant.getCongeeAnnuel());
+
+            // Sixième ligne du tableau
+            addCell(table, "Retenue CNSS: " + reglementEnseignant.getRetenueCNSS());
+            addCell(table, "Salaire Brut: " + reglementEnseignant.getSalairebrut());
+            addCell(table, "Déductions: " + reglementEnseignant.getDeductions());
+            addCell(table, "Salaire Net: " + reglementEnseignant.getSalairenet());
+
+            // Septième ligne du tableau
+            addCell(table, "Avance: " + reglementEnseignant.getAvance());
+            addCell(table, "Net à Payer: " + reglementEnseignant.getNetapayer());
+            addCell(table, " ");
+            addCell(table, " ");
+
+            // Huitième ligne du tableau
+            addCell(table, "Mode de Paiement: " + reglementEnseignant.getModedepaimenet());
+            addCell(table, "Intitulé Banque: " + reglementEnseignant.getIntitulebanque());
+            addCell(table, "Num Compte: " + reglementEnseignant.getNumcompte());
+            addCell(table, " ");
+
+            // Neuvième ligne du tableau
+            addCell(table, "Congé Pris par Mois: " + reglementEnseignant.getCongeprisparmois());
+            addCell(table, " ");
+            addCell(table, " ");
+            addCell(table, " ");
+
+            document.add(table);
+
+            document.close();
+
+            return outputStream.toByteArray();
+        } catch (DocumentException e) {
+            // Gérer les exceptions liées à la génération du PDF ici
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static void addCell(PdfPTable table, String content) {
+        PdfPCell cell = new PdfPCell(new Paragraph(content));
+        cell.setPadding(5);
+        table.addCell(cell);
+    }
+
+    */
+   public static byte[] generatePdf(ReglementEnseignant reglementEnseignant) {
+       try {
+           ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+           Document document = new Document();
+           PdfWriter.getInstance(document, outputStream);
+
+           document.open();
+           Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+           Paragraph title = new Paragraph("Fiche de paie enseignant ", titleFont);
+           title.setAlignment(Element.ALIGN_CENTER);
+           document.add(title);
+
+           // Ajouter les informations du règlement dans le PDF
+           PdfPTable table = new PdfPTable(4);
+           table.setWidthPercentage(100);
+           table.setSpacingBefore(20);
+           table.setSpacingAfter(20);
+
+           // Première ligne du tableau
+           addCell(table, "Matricule: " + reglementEnseignant.getMatricule() +  "\nCIN: " + reglementEnseignant.getCin()+ "\nNum CNSS: " + reglementEnseignant.getNumcnss(),1);
+           addCell(table, "Catégorie: " + reglementEnseignant.getCategorie() + "\nEchelon: " + reglementEnseignant.getEchelon()+ "\nSalaire de base: " + reglementEnseignant.getSalairedebase()+ "\nTaux Horaire: " + reglementEnseignant.getTauxhoraire(),1);
+           addCell(table, "Année: " + reglementEnseignant.getAnnee()+"\nMois de paiement: " + reglementEnseignant.getMoisdepais()+ "\nDate de paiement: " + reglementEnseignant.getDatedepaimenet(),1);
+           addCell(table, "Nom: " + reglementEnseignant.getUser().getNom() + "\nPrénom: " + reglementEnseignant.getUser().getPrenom(), 1);
+           addCell(table,  "Salaire de base: " + reglementEnseignant.getSalairedebase()
+                   + "\nPrime: " + reglementEnseignant.getPrime()+ "\nCongé Annuel: " + reglementEnseignant.getCongeeAnnuel()+ "\nRetenue CNSS: " + reglementEnseignant.getRetenueCNSS()
+                   + "\nSalaire Brut: " + reglementEnseignant.getSalairebrut()+ "\nDéductions: " + reglementEnseignant.getDeductions()
+                   + "\nSalaire Net: " + reglementEnseignant.getSalairenet()+ "\nAvance: " + reglementEnseignant.getAvance()
+                   + "\nNet à Payer: " + reglementEnseignant.getNetapayer(),2);
+           addCell(table, "Mode de Paiement: " + reglementEnseignant.getModedepaimenet()+ "\nIntitulé Banque: " + reglementEnseignant.getIntitulebanque()+ "\nNum Compte: " + reglementEnseignant.getNumcompte()+ "\nCongé Pris par Mois: " + reglementEnseignant.getCongeprisparmois() + "\nnombre d'heure d'absece" + reglementEnseignant.getNombredheuredabsence(), 2);
+           document.add(table);
+
+           document.close();
+
+           return outputStream.toByteArray();
+       } catch (DocumentException e) {
+           // Gérer les exceptions liées à la génération du PDF ici
+           e.printStackTrace();
+           return null;
+       }
+   }
+
+    private static void addCell(PdfPTable table, String content, int colspan) {
+        PdfPCell cell = new PdfPCell(new Paragraph(content));
+        cell.setPadding(5);
+        cell.setColspan(colspan);
+        table.addCell(cell);
+    }
 }
+
+
+

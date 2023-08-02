@@ -12,6 +12,8 @@ public class Emploi {
     private String duree;
     @OneToOne
     Classe classe;
+    @OneToOne
+    User user;
 
     public Long getId() {
         return id;
@@ -52,5 +54,13 @@ public class Emploi {
 
     public void setClasse(Classe classe) {
         this.classe = classe;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -7,9 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class BasicAuthRestController {
     @Autowired
@@ -20,5 +21,9 @@ public class BasicAuthRestController {
         User user = userService.findUserByEmail(auth.getName());
         System.out.println(user);
         return user;
+    }
+    @GetMapping("/getuserbyemail/{email}")
+    public User getuserbyemail(@PathVariable String email){
+        return userService.findUserByEmail(email);
     }
 }

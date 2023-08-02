@@ -144,7 +144,8 @@ public class UserController {
                 .orElseThrow(()-> new IllegalArgumentException("Invalid classe Id:" + d));
         user.setClasseList(new HashSet<Classe>(Arrays.asList(classe)));
         user.setPhoto(fileName.toString());
-        user.setActive(0);
+        user.setActive(1);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole("Eleve");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
@@ -185,7 +186,8 @@ public class UserController {
             // Gérer l'erreur d'écriture du fichier
         }
         user.setPhoto(fileName.toString());
-        user.setActive(0);
+        user.setActive(1);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole("Professeur");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
@@ -303,7 +305,8 @@ public class UserController {
             // Gérer l'erreur d'écriture du fichier
         }
         user.setPhoto(fileName.toString());
-        user.setActive(0);
+        user.setActive(1);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole("SUPERADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
